@@ -2444,7 +2444,7 @@
         <div class="privacy-info-box">
           <strong><span class="lang lang-cz">Správce osobních údajů:</span><span class="lang lang-ua">Адміністратор персональних даних:</span></strong>
           <span class="lang lang-cz"> Helena Harvotová, IČO 70688915, Hybešova 38/105, 602 00 Brno. E-mail: HeleNAutoskola@gmail.cz · Tel: +420 739 122 002</span>
-          <span class="lang lang-ua"> Helena Harvotová, IČO <!-- TODO: дійсний ІН -->, Hybešova 38/105, 602 00 Brno. E-mail: HeleNAutoskola@gmail.cz · Tel: +420 739 122 002</span>
+          <span class="lang lang-ua"> Helena Harvotová, IČO 70688915, Hybešova 38/105, 602 00 Brno. E-mail: HeleNAutoskola@gmail.cz · Tel: +420 739 122 002</span>
         </div>
 
         <h2><span class="lang lang-cz">1. Jaké údaje zpracováváme</span><span class="lang lang-ua">1. Які дані ми обробляємо</span></h2>
@@ -2861,11 +2861,22 @@
     const onlyBtn = document.getElementById('ckOnlyNecessary');
     if(!root) return;
 
+    const CK_VERSION = 1;
+    const CK_TTL_MS = 365 * 24 * 60 * 60 * 1000;
+
     function readPrefs(){
-      try { return JSON.parse(localStorage.getItem(CK_KEY)); } catch(e){ return null; }
+      try {
+        const p = JSON.parse(localStorage.getItem(CK_KEY));
+        if(!p) return null;
+        if(p.version !== CK_VERSION || Date.now() - p.ts > CK_TTL_MS){
+          localStorage.removeItem(CK_KEY);
+          return null;
+        }
+        return p;
+      } catch(e){ return null; }
     }
     function savePrefs(p){
-      try { localStorage.setItem(CK_KEY, JSON.stringify({ ...p, ts: Date.now() })); } catch(e){}
+      try { localStorage.setItem(CK_KEY, JSON.stringify({ ...p, version: CK_VERSION, ts: Date.now() })); } catch(e){}
     }
     // Primary button morphs: "Přijmout vše" -> "Uložit výběr" once a toggle is touched
     let touched = false;
