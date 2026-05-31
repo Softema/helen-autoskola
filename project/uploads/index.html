@@ -1,0 +1,2561 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>helen — autoškola pro strašpytlíky | Brno</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<template id="__bundler_thumbnail" data-bg-color="#1E1E1E">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#1E1E1E"/>
+    <circle cx="600" cy="370" r="180" fill="none" stroke="#0064AD" stroke-width="6"/>
+    <text x="600" y="430" font-family="Georgia, serif" font-style="italic" font-size="220" font-weight="500" fill="#FDFCF8" text-anchor="middle">h</text>
+    <text x="600" y="610" font-family="system-ui, sans-serif" font-size="36" letter-spacing="8" fill="#FDFCF8" text-anchor="middle" opacity="0.7">AUTOŠKOLA · BRNO</text>
+  </svg>
+</template>
+<style>
+  /* ---------- Tokens ---------- */
+  :root{
+    --ink:        #1E1E1E;
+    --ink-2:      #2E2E2E;
+    --ink-soft:   #4F4F4F;
+    --teal:       #0064AD;
+    --teal-deep:  #00343D;
+    --teal-soft:  #D6E8F4;
+    --green:      #7ED957;
+    --green-deep: #4E9E32;
+    --cream:      #FDFCF8;
+    --cream-2:    #F4F1E8;
+    --cream-3:    #EAE5D6;
+    --line:       #E4DFD0;
+    --line-dark:  rgba(255,255,255,.12);
+    --muted:      #737373;
+    --shadow-sm:  0 1px 2px rgba(30,30,30,.05), 0 2px 8px rgba(30,30,30,.05);
+    --shadow-md:  0 8px 24px rgba(30,30,30,.08), 0 2px 6px rgba(30,30,30,.05);
+    --radius:     14px;
+    --radius-sm:  10px;
+    --radius-lg:  22px;
+    --container:  1200px;
+    --serif: "Playfair Display", "Iowan Old Style", Georgia, serif;
+    --sans:  "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  }
+
+  *,*::before,*::after{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    font-family: var(--sans);
+    color: var(--ink);
+    background: var(--cream);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  img{ max-width:100%; display:block; }
+  a{ color: inherit; text-decoration: none; }
+  button{ font-family: inherit; cursor: pointer; }
+
+  h1,h2,h3,h4{
+    font-family: var(--serif);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    margin: 0;
+    text-wrap: balance;
+  }
+  h1{ font-size: clamp(2.4rem, 5.2vw, 4.4rem); }
+  h2{ font-size: clamp(1.9rem, 3.6vw, 3rem); }
+  h3{ font-size: clamp(1.3rem, 2vw, 1.65rem); }
+  em, .it{ font-style: italic; font-weight: 400; }
+  p{ margin:0 0 1em; text-wrap: pretty; }
+  .lead{ font-size: 1.125rem; color: var(--ink-soft); max-width: 56ch; }
+
+  .container{ width: min(100% - 2.5rem, var(--container)); margin-inline: auto; }
+  .section{ padding: clamp(4rem, 8vw, 7rem) 0; }
+  .eyebrow{
+    font-size: .8rem; text-transform: uppercase; letter-spacing: .18em;
+    color: var(--teal-deep); font-weight: 500;
+    display: inline-flex; align-items:center; gap:.5rem;
+  }
+  .eyebrow::before{ content:""; width:24px; height:1px; background: var(--teal); display:inline-block; }
+
+  /* ---------- i18n dual-tree ---------- */
+  .lang { display: contents; }
+  body[data-lang="ua"] .lang-cz { display: none; }
+  body:not([data-lang="ua"]) .lang-ua { display: none; }
+  /* placeholder swap is handled in JS via data attributes */
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display: inline-flex; align-items: center; gap: .55rem;
+    padding: .9rem 1.4rem;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    font-weight: 500; font-size: .95rem;
+    transition: transform .15s ease, background .2s ease, color .2s ease, border-color .2s ease, box-shadow .2s ease;
+    white-space: nowrap;
+  }
+  .btn:hover{ transform: translateY(-1px); }
+  .btn:active{ transform: translateY(0); }
+  .btn-primary{ background: var(--teal); color: white; }
+  .btn-primary:hover{ background: var(--teal-deep); box-shadow: 0 8px 20px rgba(0,100,173,.3); }
+  .btn-dark{ background: var(--ink); color: var(--cream); }
+  .btn-dark:hover{ background: #000000; }
+  .btn-ghost{ background: transparent; color: var(--ink); border-color: var(--line); }
+  .btn-ghost:hover{ border-color: var(--ink); }
+  .btn-ghost-light{ background: transparent; color: var(--cream); border-color: rgba(255,255,255,.25); }
+  .btn-ghost-light:hover{ border-color: var(--cream); }
+  .btn .ti{ font-size: 1.05rem; }
+
+  /* ---------- Header ---------- */
+  .header{
+    position: sticky; top:0; z-index: 50;
+    background: rgba(253,252,248,.85);
+    backdrop-filter: saturate(180%) blur(14px);
+    border-bottom: 1px solid var(--line);
+  }
+  .header-inner{
+    display: flex; align-items: center; justify-content: space-between;
+    height: 76px; gap: 1.25rem;
+  }
+  .logo{
+    display:inline-flex; align-items:baseline; gap:.15rem;
+    font-family: var(--serif); font-size: 1.6rem; font-weight: 500;
+    color: var(--ink); letter-spacing: -.02em;
+    flex-shrink: 0;
+  }
+  .logo .dot{ color: var(--teal); }
+  .logo small{
+    font-family: var(--sans); font-size: .7rem; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--muted); margin-left: .55rem; font-weight: 500; padding-bottom: 2px;
+  }
+
+  .nav{ display:flex; align-items: center; gap: 1.75rem; }
+  .nav a{
+    font-size: .95rem; color: var(--ink-soft); position: relative;
+    padding: .35rem 0;
+    transition: color .15s ease;
+  }
+  .nav a:hover{ color: var(--ink); }
+  .nav a.active{ color: var(--ink); font-weight: 500; }
+  .nav a.active::after{
+    content:""; position: absolute; left:0; right:0; bottom: -4px;
+    height: 2px; background: var(--teal); border-radius: 2px;
+  }
+  .header-cta{ display:flex; align-items:center; gap: .8rem; }
+  .header-phone{
+    display: inline-flex; align-items: center; gap: .45rem; font-size: .9rem; color: var(--ink-soft);
+  }
+  .header-phone .ti{ color: var(--teal); }
+
+  /* language switcher */
+  .lang-toggle{
+    display: inline-flex; align-items: center;
+    border: 1px solid var(--line); border-radius: 999px;
+    padding: 3px; background: var(--cream);
+  }
+  .lang-toggle button{
+    background: transparent; border: 0;
+    font-size: .78rem; font-weight: 600; letter-spacing: .08em;
+    padding: .35rem .65rem; border-radius: 999px;
+    color: var(--ink-soft);
+    transition: background .15s ease, color .15s ease;
+  }
+  .lang-toggle button.active{
+    background: var(--ink); color: var(--cream);
+  }
+  .lang-toggle button:hover:not(.active){ color: var(--ink); }
+
+  .burger{
+    display: none;
+    width: 44px; height: 44px;
+    align-items: center; justify-content: center;
+    background: transparent; border: 1px solid var(--line); border-radius: 12px;
+  }
+  .burger .ti{ font-size: 1.4rem; }
+
+  .mobile-menu{
+    position: fixed; inset: 76px 0 0 0; z-index: 49;
+    background: var(--cream); padding: 2rem 1.5rem;
+    transform: translateY(-100%); opacity: 0; pointer-events: none;
+    transition: transform .35s ease, opacity .25s ease;
+    border-bottom: 1px solid var(--line);
+    overflow-y: auto;
+  }
+  .mobile-menu.open{ transform: translateY(0); opacity: 1; pointer-events: auto; }
+  .mobile-menu a{
+    display: block; padding: 1rem 0; font-size: 1.4rem; font-family: var(--serif);
+    border-bottom: 1px solid var(--line);
+  }
+  .mobile-menu a.active{ color: var(--teal-deep); }
+  .mobile-menu .btn{ margin-top: 1.5rem; width: 100%; justify-content: center; }
+
+  @media (max-width: 1080px){
+    .nav{ gap: 1.25rem; }
+    .header-phone{ display: none; }
+  }
+  @media (max-width: 900px){
+    .nav{ display: none; }
+    .burger{ display: inline-flex; }
+    .header-cta .btn{ display: none; }
+  }
+
+  /* ---------- Page system ---------- */
+  .page{ display: none; }
+  .page.active{ display: block; animation: pageIn .4s ease both; }
+  @keyframes pageIn {
+    from{ opacity: 0; transform: translateY(8px); }
+    to  { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    background: var(--ink);
+    color: var(--cream);
+    position: relative;
+    overflow: hidden;
+    padding: clamp(4rem, 9vw, 7rem) 0 clamp(5rem, 8vw, 7rem);
+  }
+  .hero::before{
+    content:""; position:absolute; inset: 0;
+    background:
+      radial-gradient(60% 50% at 80% 20%, rgba(0,100,173,.22), transparent 60%),
+      radial-gradient(40% 40% at 15% 90%, rgba(0,100,173,.12), transparent 70%);
+    pointer-events: none;
+  }
+  .hero-grid{
+    display: grid; grid-template-columns: 1.3fr .9fr; gap: clamp(2rem, 5vw, 5rem);
+    align-items: end; position: relative;
+  }
+  @media (max-width: 900px){ .hero-grid{ grid-template-columns: 1fr; align-items: start; } }
+  .hero h1{ color: var(--cream); }
+  .hero h1 .it{ color: var(--teal); }
+  .hero-sub{
+    color: rgba(253,252,248,.7); font-size: 1.15rem; max-width: 48ch;
+    margin: 1.5rem 0 2rem;
+  }
+  .hero-cta{ display:flex; gap: .75rem; flex-wrap: wrap; }
+  .hero-eyebrow{ color: var(--teal); margin-bottom: 1.5rem; }
+  .hero-eyebrow::before{ background: var(--teal); }
+
+  /* hero strašpytlíci pill */
+  .pill-hero{
+    display: inline-flex; align-items: center; gap: .55rem;
+    background: rgba(0,100,173,.16);
+    border: 1px solid rgba(0,100,173,.4);
+    color: var(--teal); padding: .45rem .9rem;
+    border-radius: 999px; font-size: .82rem; font-weight: 500;
+    margin-bottom: 1.5rem;
+    letter-spacing: .02em;
+  }
+  .pill-hero .ti{ font-size: 1rem; }
+
+  .instructor-card{
+    background: rgba(255,255,255,.04);
+    border: 1px solid var(--line-dark);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    backdrop-filter: blur(6px);
+  }
+  .instructor-head{ display:flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; }
+  .avatar{
+    width: 64px; height: 64px; border-radius: 50%;
+    background: linear-gradient(135deg, #013E69, #0064AD 60%, #D6E8F4);
+    display: grid; place-items: center;
+    font-family: var(--serif); color: white; font-size: 1.5rem; font-style: italic;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.15);
+    flex-shrink: 0;
+  }
+  .instructor-head h3{ color: var(--cream); margin: 0; line-height: 1.15; }
+  .instructor-head p{ margin: .15rem 0 0; font-size: .85rem; color: rgba(253,252,248,.55); }
+  .instructor-quote{
+    font-family: var(--serif); font-style: italic; font-size: 1.1rem;
+    color: rgba(253,252,248,.85); line-height: 1.45; margin: 0 0 1.25rem;
+    border-left: 2px solid var(--teal); padding-left: 1rem;
+  }
+  .badge-list{ display:flex; flex-wrap: wrap; gap: .5rem; }
+  .badge{
+    display: inline-flex; align-items: center; gap: .35rem;
+    font-size: .78rem; color: rgba(253,252,248,.8);
+    border: 1px solid var(--line-dark);
+    padding: .35rem .7rem; border-radius: 999px;
+  }
+  .badge .ti{ color: var(--teal); font-size: .95rem; }
+
+  /* stats bar */
+  .stats{
+    background: var(--ink-2); color: var(--cream);
+    padding: 2.25rem 0;
+    border-top: 1px solid var(--line-dark);
+  }
+  .stats-grid{ display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  @media (max-width: 700px){ .stats-grid{ grid-template-columns: repeat(2,1fr); row-gap: 2rem; } }
+  .stat{ text-align: center; position: relative; padding: 0 1rem; }
+  .stat:not(:last-child)::after{
+    content:""; position: absolute; right: 0; top: 10%; bottom: 10%;
+    width: 1px; background: var(--line-dark);
+  }
+  @media (max-width: 700px){
+    .stat:nth-child(2)::after, .stat:nth-child(3)::after{ display: none; }
+  }
+  .stat-value{ font-family: var(--serif); font-size: clamp(2rem, 4vw, 2.75rem); color: var(--cream); }
+  .stat-value .it{ color: var(--teal); }
+  .stat-label{ font-size: .8rem; color: rgba(253,252,248,.6); letter-spacing: .04em; }
+
+  /* ---------- Strašpytlíci dedicated section ---------- */
+  .scaredy{
+    background: var(--cream-2);
+    padding: clamp(4rem, 7vw, 6rem) 0;
+    position: relative;
+  }
+  .scaredy-inner{
+    display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 5rem);
+    align-items: center;
+  }
+  @media (max-width: 800px){ .scaredy-inner{ grid-template-columns: 1fr; } }
+  .scaredy-label{
+    font-family: var(--serif); font-style: italic; color: var(--teal-deep);
+    font-size: 1.2rem; display: inline-flex; align-items: center; gap: .55rem;
+    margin-bottom: 1rem;
+  }
+  .scaredy-label::before{
+    content:""; width: 28px; height: 1px; background: var(--teal);
+  }
+  .scaredy h2 .it{ color: var(--teal-deep); }
+  .scaredy-quote{
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(1.3rem, 2.2vw, 1.75rem); line-height: 1.4;
+    color: var(--ink); margin: 0;
+  }
+  .scaredy-quote::before{
+    content: "„"; font-size: 4rem; line-height: 0; color: var(--teal);
+    vertical-align: -.5rem; margin-right: .2rem;
+  }
+  .scaredy-list{
+    list-style: none; padding: 0; margin: 0 0 1.5rem;
+    display: flex; flex-direction: column; gap: .8rem;
+  }
+  .scaredy-list li{
+    display: flex; gap: .75rem; align-items: flex-start;
+    font-size: 1.02rem; color: var(--ink);
+  }
+  .scaredy-list .ti{
+    color: var(--green-deep); flex-shrink: 0; margin-top: 4px;
+    font-size: 1.1rem;
+  }
+  .scaredy-foot{ font-size: 1.02rem; color: var(--ink-soft); margin: 0; }
+
+  /* ---------- Section header ---------- */
+  .section-head{
+    display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+    align-items: end; margin-bottom: 3.5rem;
+  }
+  @media (max-width: 800px){ .section-head{ grid-template-columns: 1fr; gap: 1.25rem; margin-bottom: 2.5rem; } }
+  .section-head h2 .it{ color: var(--teal-deep); }
+
+  /* ---------- Feature cards ---------- */
+  .features{ background: var(--cream); }
+  .feature-grid{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  @media (max-width: 900px){ .feature-grid{ grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 600px){ .feature-grid{ grid-template-columns: 1fr; } }
+  .feature{
+    background: white; border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 1.75rem;
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .feature:hover{ transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--cream-3); }
+  .feature-icon{
+    width: 48px; height: 48px; border-radius: 12px;
+    display: grid; place-items: center;
+    background: var(--teal-soft); color: var(--teal-deep);
+    margin-bottom: 1.25rem;
+  }
+  .feature-icon .ti{ font-size: 1.4rem; }
+  .feature h3{ font-size: 1.25rem; margin-bottom: .5rem; }
+  .feature p{ color: var(--ink-soft); font-size: .95rem; margin: 0; }
+
+  /* ---------- Courses ---------- */
+  .courses{ background: var(--cream-2); }
+  .course-grid{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  @media (max-width: 900px){ .course-grid{ grid-template-columns: 1fr; } }
+  .course{
+    background: var(--cream); border: 1px solid var(--line);
+    border-radius: var(--radius-lg); padding: 2rem;
+    display: flex; flex-direction: column; gap: 1rem;
+    transition: transform .2s ease, box-shadow .2s ease;
+    position: relative;
+  }
+  .course:hover{ transform: translateY(-3px); box-shadow: var(--shadow-md); }
+  .course.featured{ background: var(--ink); color: var(--cream); border-color: var(--ink); }
+  .course.featured h3{ color: var(--cream); }
+  .course.featured .course-desc{ color: rgba(253,252,248,.7); }
+  .course.featured .course-feature{ color: rgba(253,252,248,.85); }
+  .course.featured .course-feature .ti{ color: var(--green); }
+  .course.featured .course-price{ color: var(--cream); }
+  .course.featured .course-price small{ color: rgba(253,252,248,.55); }
+  .course-tag{
+    display: inline-flex; align-items:center; gap:.35rem;
+    font-size: .78rem; font-weight: 500; letter-spacing: .04em;
+    color: var(--teal-deep); background: var(--teal-soft);
+    padding: .3rem .65rem; border-radius: 999px; text-transform: uppercase;
+    align-self: flex-start;
+  }
+  .course.featured .course-tag{ background: rgba(0,100,173,.18); color: var(--teal); }
+  .course h3{ font-size: 1.55rem; }
+  .course-desc{ color: var(--ink-soft); font-size: .95rem; margin: 0; }
+  .course-price{ font-family: var(--serif); font-size: 2.1rem; color: var(--ink); line-height: 1; margin-top: auto; }
+  .course-price small{ font-family: var(--sans); font-size: .9rem; color: var(--muted); font-weight: 400; margin-left: .25rem; }
+  .course-features{ list-style: none; padding: 0; margin: .5rem 0 1rem; display: flex; flex-direction: column; gap: .55rem; }
+  .course-feature{ display: flex; gap: .55rem; font-size: .92rem; align-items: flex-start; }
+  .course-feature .ti{ color: var(--green-deep); flex-shrink: 0; margin-top: 2px; }
+
+  /* ---------- Testimonials ---------- */
+  .testimonials{ background: var(--cream); }
+  .testimonial-grid{ display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  @media (max-width: 800px){ .testimonial-grid{ grid-template-columns: 1fr; } }
+  .testimonial{
+    background: var(--cream-2); border-radius: var(--radius);
+    padding: 1.75rem; border: 1px solid var(--line);
+  }
+  .stars{ color: var(--teal); display: flex; gap: 2px; margin-bottom: .9rem; }
+  .stars .ti{ font-size: 1rem; }
+  .testimonial blockquote{
+    font-family: var(--serif); font-size: 1.15rem; line-height: 1.4;
+    margin: 0 0 1.25rem; color: var(--ink); font-style: italic;
+  }
+  .testimonial-meta{ display: flex; align-items: center; gap: .75rem; font-size: .85rem; }
+  .testimonial-meta .avatar{ width: 36px; height: 36px; font-size: .9rem; }
+  .testimonial-meta strong{ display: block; color: var(--ink); font-weight: 500; font-size: .92rem; }
+  .testimonial-meta span{ color: var(--muted); }
+
+  /* ---------- CTA ---------- */
+  .cta-band{
+    background: var(--ink); color: var(--cream);
+    padding: clamp(3.5rem, 6vw, 5rem) 0;
+    position: relative; overflow: hidden;
+  }
+  .cta-band::before{
+    content:""; position: absolute; inset: 0;
+    background: radial-gradient(50% 60% at 80% 50%, rgba(0,100,173,.22), transparent 60%);
+    pointer-events: none;
+  }
+  .cta-inner{
+    display: grid; grid-template-columns: 1.5fr auto; gap: 2rem; align-items: center;
+    position: relative;
+  }
+  @media (max-width: 800px){ .cta-inner{ grid-template-columns: 1fr; } }
+  .cta-band h2{ color: var(--cream); }
+  .cta-band h2 .it{ color: var(--teal); }
+  .cta-band p{ color: rgba(253,252,248,.7); margin: .75rem 0 0; max-width: 50ch; }
+
+  /* ---------- Footer ---------- */
+  .footer{
+    background: #111715; color: rgba(253,252,248,.65); padding: 3.5rem 0 2rem;
+    font-size: .9rem;
+  }
+  .footer-grid{
+    display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 2.5rem;
+    margin-bottom: 2.5rem;
+  }
+  @media (max-width: 800px){ .footer-grid{ grid-template-columns: 1fr 1fr; gap: 2rem; } }
+  @media (max-width: 480px){ .footer-grid{ grid-template-columns: 1fr; } }
+  .footer h4{
+    font-family: var(--sans); font-size: .8rem; text-transform: uppercase; letter-spacing: .14em;
+    color: var(--cream); font-weight: 500; margin-bottom: 1rem;
+  }
+  .footer .logo{ color: var(--cream); margin-bottom: .75rem; }
+  .footer .logo small{ color: rgba(253,252,248,.5); }
+  .footer ul{ list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: .55rem; }
+  .footer a:hover{ color: var(--cream); }
+  .footer-bottom{
+    border-top: 1px solid rgba(255,255,255,.08); padding-top: 1.5rem;
+    display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+    font-size: .82rem;
+  }
+
+  /* ---------- About page ---------- */
+  .about-hero{
+    background: var(--cream-2);
+    padding: clamp(4rem, 7vw, 6rem) 0 clamp(3rem, 5vw, 4.5rem);
+  }
+  .about-hero-grid{
+    display: grid; grid-template-columns: 1.1fr .9fr; gap: 3rem; align-items: center;
+  }
+  @media (max-width: 900px){ .about-hero-grid{ grid-template-columns: 1fr; } }
+  .helena-portrait{
+    aspect-ratio: 4/5; width: 100%;
+    background:
+      radial-gradient(60% 60% at 30% 30%, rgba(255,255,255,.6), transparent 60%),
+      linear-gradient(160deg, #BDD7E8 0%, #4E7FA0 50%, var(--ink) 100%);
+    border-radius: var(--radius-lg); position: relative;
+    display: grid; place-items: center; overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+  .helena-portrait .initials{
+    font-family: var(--serif); font-style: italic; font-size: 8rem; color: rgba(255,255,255,.85);
+    text-shadow: 0 4px 20px rgba(0,0,0,.2);
+  }
+  .helena-portrait .badge-floating{
+    position: absolute; bottom: 1.25rem; left: 1.25rem; right: 1.25rem;
+    background: rgba(30,30,30,.88); backdrop-filter: blur(8px);
+    color: var(--cream); border-radius: 12px; padding: .9rem 1rem;
+    display: flex; align-items: center; gap: .75rem;
+    font-size: .85rem;
+  }
+  .helena-portrait .badge-floating .ti{ color: var(--teal); font-size: 1.4rem; }
+
+  .big-quote{
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    line-height: 1.35; color: var(--ink);
+    border-left: 3px solid var(--teal);
+    padding: .5rem 0 .5rem 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .value-grid{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  @media (max-width: 800px){ .value-grid{ grid-template-columns: 1fr; } }
+  .value{ padding: 1.5rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--cream); }
+  .value .num{ font-family: var(--serif); color: var(--teal); font-size: 1.1rem; font-style: italic; margin-bottom: .5rem; }
+  .value h4{ font-family: var(--serif); font-size: 1.25rem; margin: 0 0 .35rem; font-weight: 500; }
+  .value p{ font-size: .92rem; color: var(--ink-soft); margin: 0; }
+
+  /* steps */
+  .steps{ background: var(--ink); color: var(--cream); }
+  .steps h2{ color: var(--cream); }
+  .steps h2 .it{ color: var(--teal); }
+  .step-grid{ display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+  @media (max-width: 900px){ .step-grid{ grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 500px){ .step-grid{ grid-template-columns: 1fr; } }
+  .step{
+    padding: 1.75rem; border: 1px solid var(--line-dark);
+    border-radius: var(--radius); background: rgba(255,255,255,.03);
+    position: relative;
+  }
+  .step-num{ font-family: var(--serif); font-style: italic; color: var(--teal); font-size: 2.2rem; line-height: 1; margin-bottom: 1rem; }
+  .step h4{ font-family: var(--serif); color: var(--cream); font-size: 1.3rem; margin: 0 0 .5rem; font-weight: 500; }
+  .step p{ color: rgba(253,252,248,.65); font-size: .92rem; margin: 0; }
+
+  .psych{ background: var(--cream); }
+  .psych-grid{ display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+  @media (max-width: 800px){ .psych-grid{ grid-template-columns: 1fr; gap: 2rem; } }
+  .psych-list{ list-style: none; padding: 0; margin: 1.5rem 0 0; display: flex; flex-direction: column; gap: 1.25rem; }
+  .psych-list li{
+    display: grid; grid-template-columns: 36px 1fr; gap: 1rem; align-items: start;
+    padding-bottom: 1.25rem; border-bottom: 1px solid var(--line);
+  }
+  .psych-list li:last-child{ border-bottom: 0; }
+  .psych-icon{
+    width: 36px; height: 36px; border-radius: 10px;
+    background: var(--teal-soft); color: var(--teal-deep);
+    display: grid; place-items: center;
+  }
+  .psych-list h4{ font-family: var(--sans); font-size: 1.05rem; margin: 0 0 .25rem; font-weight: 500; }
+  .psych-list p{ font-size: .93rem; color: var(--ink-soft); margin: 0; }
+
+  /* ---------- Courses page detail ---------- */
+  .page-header{
+    background: var(--ink); color: var(--cream);
+    padding: clamp(4rem, 6vw, 5.5rem) 0 clamp(3rem, 5vw, 4rem);
+    text-align: center;
+  }
+  .page-header h1{ color: var(--cream); margin-bottom: 1rem; }
+  .page-header h1 .it{ color: var(--teal); }
+  .page-header p{ color: rgba(253,252,248,.7); max-width: 60ch; margin: 0 auto; font-size: 1.1rem; }
+
+  .course-detail{
+    background: var(--cream); border: 1px solid var(--line);
+    border-radius: var(--radius-lg); overflow: hidden;
+    margin-bottom: 1.5rem;
+    transition: box-shadow .2s ease;
+  }
+  .course-detail:hover{ box-shadow: var(--shadow-md); }
+  .course-detail-inner{
+    display: grid; grid-template-columns: 280px 1fr auto;
+    gap: 2.5rem; padding: 2.25rem; align-items: center;
+  }
+  @media (max-width: 900px){
+    .course-detail-inner{ grid-template-columns: 1fr; gap: 1.25rem; padding: 1.75rem; }
+  }
+  .course-detail-head h3{ font-size: 1.75rem; margin: .5rem 0 .25rem; }
+  .course-detail-head .course-tag{ margin-bottom: .5rem; }
+  .course-detail-head p{ color: var(--ink-soft); margin: 0; font-size: .95rem; }
+  .course-detail-feat ul{ list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: .55rem 1.25rem; }
+  @media (max-width: 600px){ .course-detail-feat ul{ grid-template-columns: 1fr; } }
+  .course-detail-feat li{ display: flex; gap: .55rem; font-size: .93rem; align-items: flex-start; }
+  .course-detail-feat li .ti{ color: var(--teal); flex-shrink: 0; margin-top: 2px; }
+  .course-detail-cta{ text-align: center; }
+  .course-detail-cta .price{ font-family: var(--serif); font-size: 2.1rem; color: var(--ink); line-height: 1; margin-bottom: .25rem; }
+  .course-detail-cta .price small{ font-family: var(--sans); font-size: .85rem; color: var(--muted); font-weight: 400; display: block; margin-top: .25rem; }
+  .course-detail-cta .btn{ margin-top: 1rem; }
+
+  /* fees table */
+  .fees-table{ background: var(--cream); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  .fees-table table{ width: 100%; border-collapse: collapse; }
+  .fees-table th, .fees-table td{ padding: 1rem 1.25rem; text-align: left; border-bottom: 1px solid var(--line); font-size: .95rem; }
+  .fees-table th{ background: var(--cream-2); font-weight: 500; color: var(--ink-soft); text-transform: uppercase; font-size: .78rem; letter-spacing: .08em; }
+  .fees-table tr:last-child td{ border-bottom: 0; }
+  .fees-table td:last-child{ text-align: right; font-family: var(--serif); font-size: 1.05rem; color: var(--ink); }
+  .fees-table .note{ font-size: .82rem; color: var(--muted); }
+
+  /* FAQ */
+  .faq{ display: flex; flex-direction: column; gap: .75rem; }
+  .faq-item{
+    background: var(--cream); border: 1px solid var(--line); border-radius: var(--radius);
+    overflow: hidden;
+    transition: border-color .15s ease;
+  }
+  .faq-item.open{ border-color: var(--teal); }
+  .faq-q{
+    width: 100%; text-align: left; padding: 1.25rem 1.5rem;
+    background: transparent; border: 0;
+    display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+    font-family: var(--serif); font-size: 1.15rem; color: var(--ink); font-weight: 500;
+  }
+  .faq-q .ti{ color: var(--teal); transition: transform .25s ease; font-size: 1.5rem; flex-shrink: 0; }
+  .faq-item.open .faq-q .ti{ transform: rotate(45deg); }
+  .faq-a{ max-height: 0; overflow: hidden; transition: max-height .3s ease; }
+  .faq-item.open .faq-a{ max-height: 500px; }
+  .faq-a-inner{ padding: 0 1.5rem 1.5rem; color: var(--ink-soft); font-size: .98rem; line-height: 1.6; }
+
+  /* ---------- Contact ---------- */
+  .contact-grid{
+    display: grid; grid-template-columns: 1.2fr 1fr; gap: 3rem;
+    align-items: start;
+  }
+  @media (max-width: 900px){ .contact-grid{ grid-template-columns: 1fr; gap: 2.5rem; } }
+
+  .contact-form{
+    background: var(--cream); border: 1px solid var(--line); border-radius: var(--radius-lg);
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    box-shadow: var(--shadow-sm);
+  }
+  .form-row{ margin-bottom: 1.25rem; }
+  .form-row.split{ display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 500px){ .form-row.split{ grid-template-columns: 1fr; } }
+  .form-row label{
+    display: block; font-size: .82rem; font-weight: 500; color: var(--ink-soft);
+    margin-bottom: .4rem; letter-spacing: .04em;
+  }
+  .form-row label .req{ color: var(--teal-deep); }
+  .form-row input, .form-row textarea, .form-row select{
+    width: 100%; padding: .85rem 1rem;
+    background: var(--cream-2); border: 1px solid var(--line);
+    border-radius: 10px;
+    font-family: inherit; font-size: 1rem; color: var(--ink);
+    transition: border-color .15s ease, background .15s ease;
+  }
+  .form-row input:focus, .form-row textarea:focus, .form-row select:focus{
+    outline: none; border-color: var(--teal); background: var(--cream);
+    box-shadow: 0 0 0 4px rgba(0,100,173,.12);
+  }
+  .form-row textarea{ resize: vertical; min-height: 130px; }
+  .form-row.error input, .form-row.error textarea, .form-row.error select{
+    border-color: #c9523a; background: #fdf1ed;
+  }
+  .form-error{ font-size: .82rem; color: #c9523a; margin-top: .35rem; display: none; }
+  .form-row.error .form-error{ display: block; }
+  .form-submit{ margin-top: .5rem; width: 100%; justify-content: center; padding: 1.1rem 1.4rem; font-size: 1rem; }
+  .form-note{ font-size: .82rem; color: var(--muted); text-align: center; margin-top: 1rem; }
+
+  .contact-info h3{ font-size: 1.65rem; margin-bottom: 1.25rem; }
+  .contact-info h3 .it{ color: var(--teal-deep); }
+  .contact-list{ list-style: none; padding: 0; margin: 0 0 2rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .contact-list li{ display: grid; grid-template-columns: 40px 1fr; gap: 1rem; align-items: start; }
+  .contact-list .icon{
+    width: 40px; height: 40px; border-radius: 10px;
+    background: var(--teal-soft); color: var(--teal-deep);
+    display: grid; place-items: center;
+  }
+  .contact-list .icon .ti{ font-size: 1.2rem; }
+  .contact-list .label{ font-size: .78rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: .2rem; }
+  .contact-list .value{ font-size: 1rem; color: var(--ink); }
+  .contact-list a:hover .value{ color: var(--teal-deep); }
+
+  .map-placeholder{
+    aspect-ratio: 16/10; border-radius: var(--radius);
+    background:
+      radial-gradient(circle at 50% 40%, rgba(255,255,255,.4), transparent 60%),
+      linear-gradient(135deg, #BFD9EC 0%, #2D86C4 60%, var(--teal-deep) 100%);
+    position: relative; display: grid; place-items: center;
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  .map-placeholder::before{
+    content:""; position: absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .map-pin{
+    position: relative; z-index: 1;
+    width: 56px; height: 56px; border-radius: 50% 50% 50% 0;
+    background: var(--ink); transform: rotate(-45deg);
+    display: grid; place-items: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,.25);
+  }
+  .map-pin .ti{ transform: rotate(45deg); color: var(--teal); font-size: 1.5rem; }
+  .map-caption{
+    position: absolute; bottom: 1rem; left: 1rem; right: 1rem;
+    background: rgba(253,252,248,.95); padding: .65rem .9rem;
+    border-radius: 10px; font-size: .85rem; color: var(--ink);
+    display: flex; justify-content: space-between; align-items: center;
+    backdrop-filter: blur(6px);
+  }
+  .map-caption .ti{ color: var(--teal-deep); }
+
+  .form-success{ display: none; text-align: center; padding: 2rem 1rem; }
+  .form-success.show{ display: block; animation: pageIn .4s ease both; }
+  .success-icon{
+    width: 72px; height: 72px; border-radius: 50%;
+    background: var(--teal-soft); color: var(--teal-deep);
+    display: grid; place-items: center; margin: 0 auto 1.25rem;
+  }
+  .success-icon .ti{ font-size: 2.2rem; }
+  .form-success h3{ font-size: 1.6rem; margin-bottom: .5rem; }
+  .form-success p{ color: var(--ink-soft); margin: 0 auto 1.5rem; max-width: 38ch; }
+
+  .hours{ display: flex; flex-direction: column; gap: .5rem; }
+  .hours-row{
+    display: flex; justify-content: space-between; padding: .4rem 0;
+    border-bottom: 1px dashed var(--line); font-size: .95rem;
+  }
+  .hours-row:last-child{ border-bottom: 0; }
+  .hours-row span:first-child{ color: var(--ink-soft); }
+  .hours-row span:last-child{ color: var(--ink); font-weight: 500; }
+
+  .mt-md{ margin-top: 1.5rem; }
+  .mt-lg{ margin-top: 2.5rem; }
+  .deco-mark{ font-family: var(--serif); font-style: italic; color: var(--teal); font-size: 1.4rem; }
+
+  /* ===================== Cookie consent ===================== */
+  .ck-root{ position: fixed; inset: 0; z-index: 200; pointer-events: none; }
+  .ck-root[hidden]{ display: none; }
+  .ck-scrim{
+    position: absolute; inset: 0; background: rgba(30,30,30,.32);
+    backdrop-filter: blur(2px); opacity: 0; transition: opacity .35s ease;
+    pointer-events: auto;
+  }
+  .ck-root.show .ck-scrim{ opacity: 1; }
+  .ck-panel{
+    position: absolute; right: 24px; bottom: 24px; transform: translate(0, 16px);
+    width: min(420px, calc(100vw - 2.5rem));
+    background: var(--cream); border: 1px solid var(--line);
+    border-radius: var(--radius-lg); box-shadow: 0 20px 50px -12px rgba(30,30,30,.28), 0 6px 16px rgba(30,30,30,.08);
+    padding: 1.5rem 1.5rem 1.25rem; pointer-events: auto;
+    opacity: 0; transition: opacity .35s ease, transform .35s cubic-bezier(.2,.8,.2,1);
+  }
+  .ck-root.show .ck-panel{ opacity: 1; transform: translate(0, 0); }
+  .ck-pill{
+    display: inline-flex; align-items: center; gap: .45rem;
+    font-size: .7rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--teal-deep); background: var(--teal-soft);
+    padding: .32rem .7rem; border-radius: 999px; margin-bottom: .85rem;
+  }
+  .ck-pill .ti{ font-size: .95rem; }
+  .ck-title{ font-family: var(--serif); font-weight: 500; font-size: 1.32rem; margin: 0 0 .5rem; letter-spacing: -.01em; }
+  .ck-title .it{ font-style: italic; color: var(--teal); }
+  .ck-text{ margin: 0 0 1.15rem; font-size: .88rem; color: var(--ink-soft); line-height: 1.55; }
+  .ck-opt{
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    padding: .85rem 0; border-top: 1px solid var(--line);
+  }
+  .ck-ot{ font-weight: 500; font-size: .92rem; }
+  .ck-od{ font-size: .78rem; color: var(--muted); margin-top: .1rem; line-height: 1.4; }
+  .ck-req{ font-size: .72rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--green-deep); flex-shrink: 0; }
+  .ck-tg{ position: relative; width: 44px; height: 26px; flex-shrink: 0; }
+  .ck-tg input{ position: absolute; opacity: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+  .ck-tg .track{ position: absolute; inset: 0; border-radius: 999px; background: var(--cream-3); transition: background .2s; }
+  .ck-tg .knob{ position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: #fff; box-shadow: var(--shadow-sm); transition: transform .2s; }
+  .ck-tg input:checked + .track{ background: var(--teal); }
+  .ck-tg input:checked + .track + .knob{ transform: translateX(18px); }
+  .ck-actions{ display: flex; gap: .6rem; margin-top: 1.15rem; }
+  .ck-actions .btn{ flex: 1; justify-content: center; padding: .78rem 1.1rem; font-size: .92rem; }
+  .ck-foot{ display: flex; justify-content: center; margin-top: .9rem; }
+  .ck-foot a{
+    font-size: .82rem; font-weight: 500; color: var(--ink-soft);
+    text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--line);
+    transition: color .15s;
+  }
+  .ck-foot a:hover{ color: var(--ink); }
+  @media (max-width: 480px){
+    .ck-panel{ right: 12px; left: 12px; width: auto; bottom: 12px; padding: 1.25rem 1.15rem 1.1rem; }
+    .ck-actions{ flex-direction: column-reverse; }
+  }
+  /* floating reopen button */
+  .ck-fab{
+    position: fixed; right: 20px; bottom: 20px; z-index: 190;
+    width: 48px; height: 48px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: var(--cream); color: var(--teal-deep);
+    border: 1px solid var(--line); box-shadow: var(--shadow-md);
+    transition: transform .15s ease, box-shadow .2s ease, color .2s ease;
+  }
+  .ck-fab[hidden]{ display: none; }
+  .ck-fab:hover{ transform: translateY(-2px); color: var(--teal); box-shadow: var(--shadow-md), 0 8px 20px rgba(0,100,173,.18); }
+  .ck-fab .ti{ font-size: 1.45rem; }
+</style>
+</head>
+<body data-lang="cs">
+
+<!-- ===================== HEADER ===================== -->
+<header class="header" data-screen-label="Header (global)">
+  <div class="container header-inner">
+    <a href="#" class="logo" data-nav="home">
+      helen<span class="dot">.</span>
+      <small><span class="lang lang-cz">autoškola Brno</span><span class="lang lang-ua">автошкола Брно</span></small>
+    </a>
+    <nav class="nav">
+      <a href="#" data-nav="home" class="active">
+        <span class="lang lang-cz">Domů</span><span class="lang lang-ua">Головна</span>
+      </a>
+      <a href="#" data-nav="about">
+        <span class="lang lang-cz">O nás</span><span class="lang lang-ua">Про нас</span>
+      </a>
+      <a href="#" data-nav="courses">
+        <span class="lang lang-cz">Kurzy &amp; ceník</span><span class="lang lang-ua">Курси та ціни</span>
+      </a>
+      <a href="#" data-nav="contact">
+        <span class="lang lang-cz">Kontakt</span><span class="lang lang-ua">Контакти</span>
+      </a>
+    </nav>
+    <div class="header-cta">
+      <a href="tel:+420739122002" class="header-phone">
+        <i class="ti ti-phone"></i> 739 122 002
+      </a>
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button data-set-lang="cs" class="active">CZ</button>
+        <button data-set-lang="ua">UA</button>
+      </div>
+      <a href="#" class="btn btn-primary" data-nav="contact">
+        <span class="lang lang-cz">Konzultace zdarma</span><span class="lang lang-ua">Безкоштовна консультація</span>
+        <i class="ti ti-arrow-right"></i>
+      </a>
+      <button class="burger" id="burger" aria-label="Menu">
+        <i class="ti ti-menu-2"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="#" data-nav="home" class="active">
+    <span class="lang lang-cz">Domů</span><span class="lang lang-ua">Головна</span>
+  </a>
+  <a href="#" data-nav="about">
+    <span class="lang lang-cz">O nás</span><span class="lang lang-ua">Про нас</span>
+  </a>
+  <a href="#" data-nav="courses">
+    <span class="lang lang-cz">Kurzy &amp; ceník</span><span class="lang lang-ua">Курси та ціни</span>
+  </a>
+  <a href="#" data-nav="contact">
+    <span class="lang lang-cz">Kontakt</span><span class="lang lang-ua">Контакти</span>
+  </a>
+  <a href="#" class="btn btn-primary" data-nav="contact">
+    <span class="lang lang-cz">Konzultace zdarma</span><span class="lang lang-ua">Безкоштовна консультація</span>
+    <i class="ti ti-arrow-right"></i>
+  </a>
+</nav>
+
+<!-- ===================== HOME ===================== -->
+<main>
+<section class="page active" id="page-home" data-screen-label="01 Home">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="pill-hero">
+          <i class="ti ti-heart-handshake"></i>
+          <span class="lang lang-cz">Autoškola pro strašpytlíky</span><span class="lang lang-ua">Автошкола для боягузів</span>
+        </div>
+        <h1>
+          <span class="lang lang-cz">Řídit se naučíte.<br/><em class="it">I když se bojíte.</em></span>
+          <span class="lang lang-ua">Ви навчитеся їздити.<br/><em class="it">Навіть якщо боїтеся.</em></span>
+        </h1>
+        <p class="hero-sub">
+          <span class="lang lang-cz">Empatický přístup ke každému, kdo má z auta strach — ať už po nehodě, po letech přestávky, nebo poprvé v životě. Bez křiku, bez stresu, ve vašem tempu.</span>
+          <span class="lang lang-ua">Емпатичний підхід до кожного, хто боїться сісти за кермо — після аварії, після років перерви чи вперше в житті. Без крику, без стресу, у вашому темпі.</span>
+        </p>
+        <div class="hero-cta">
+          <a href="#" class="btn btn-primary" data-nav="contact">
+            <i class="ti ti-calendar-heart"></i>
+            <span class="lang lang-cz">Domluvit konzultaci</span><span class="lang lang-ua">Записатися на консультацію</span>
+          </a>
+          <a href="#" class="btn btn-ghost-light" data-nav="courses">
+            <span class="lang lang-cz">Prohlédnout kurzy</span><span class="lang lang-ua">Переглянути курси</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="instructor-card">
+        <div class="instructor-head">
+          <div class="avatar">H</div>
+          <div>
+            <h3>Helena Harvotová</h3>
+            <p>
+              <span class="lang lang-cz">Instruktorka &amp; majitelka autoškoly</span>
+              <span class="lang lang-ua">Інструкторка та власниця автошколи</span>
+            </p>
+          </div>
+        </div>
+        <p class="instructor-quote">
+          <span class="lang lang-cz">„Strach z řízení není slabost. Je to jen signál, že někdo nešel vaším tempem. Začneme znovu — pomalu a s laskavostí."</span>
+          <span class="lang lang-ua">„Страх перед кермом — не слабкість. Це сигнал, що хтось не йшов вашим темпом. Почнемо знову — повільно й з добротою."</span>
+        </p>
+        <div class="badge-list">
+          <span class="badge"><i class="ti ti-certificate"></i>
+            <span class="lang lang-cz">15 let praxe</span><span class="lang lang-ua">15 років практики</span>
+          </span>
+          <span class="badge"><i class="ti ti-brain"></i>
+            <span class="lang lang-cz">Psychologický výcvik</span><span class="lang lang-ua">Психологічна підготовка</span>
+          </span>
+          <span class="badge"><i class="ti ti-heart-handshake"></i>
+            <span class="lang lang-cz">1:1 lekce</span><span class="lang lang-ua">Заняття 1:1</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="container stats-grid">
+      <div class="stat">
+        <div class="stat-value">94<em class="it">%</em></div>
+        <div class="stat-label">
+          <span class="lang lang-cz">úspěšnost u zkoušek</span><span class="lang lang-ua">успішність на іспитах</span>
+        </div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">600<em class="it">+</em></div>
+        <div class="stat-label">
+          <span class="lang lang-cz">absolventů</span><span class="lang lang-ua">випускників</span>
+        </div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">15 <em class="it"><span class="lang lang-cz">let</span><span class="lang lang-ua">років</span></em></div>
+        <div class="stat-label">
+          <span class="lang lang-cz">zkušeností</span><span class="lang lang-ua">досвіду</span>
+        </div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">1:1</div>
+        <div class="stat-label">
+          <span class="lang lang-cz">individuální lekce</span><span class="lang lang-ua">індивідуальні заняття</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Strašpytlíci dedicated section -->
+  <section class="scaredy" data-screen-label="Strašpytlíci">
+    <div class="container scaredy-inner">
+      <div>
+        <div class="scaredy-label">
+          <span class="lang lang-cz">Pro strašpytlíky</span><span class="lang lang-ua">Для боягузів</span>
+        </div>
+        <h2>
+          <span class="lang lang-cz">Možná jste <em class="it">strašpytlík.</em><br/>U nás je to vítané.</span>
+          <span class="lang lang-ua">Можливо, ви <em class="it">боягуз.</em><br/>У нас це вітається.</span>
+        </h2>
+        <p class="big-quote" style="margin-top: 2rem;">
+          <span class="lang lang-cz">„Strašpytlík není diagnóza. Je to označení pro člověka, který má dobrý důvod se bát — a najednou ho někdo nevyslechne."</span>
+          <span class="lang lang-ua">„Боягуз — це не діагноз. Це позначення для людини, яка має поважну причину боятися, і яку раптом ніхто не слухає."</span>
+        </p>
+      </div>
+
+      <div>
+        <p style="font-size: 1.05rem; color: var(--ink); margin: 0 0 1.25rem;">
+          <span class="lang lang-cz">Většina našich studentů přišla s jednou větou:</span>
+          <span class="lang lang-ua">Більшість наших студентів прийшли з однією фразою:</span>
+        </p>
+        <ul class="scaredy-list">
+          <li><i class="ti ti-quote"></i>
+            <span class="lang lang-cz"><em class="it">„Bojím se křižovatek."</em></span>
+            <span class="lang lang-ua"><em class="it">„Я боюся перехресть."</em></span>
+          </li>
+          <li><i class="ti ti-quote"></i>
+            <span class="lang lang-cz"><em class="it">„Po nehodě jsem nesedla za volant 4 roky."</em></span>
+            <span class="lang lang-ua"><em class="it">„Після аварії я не сідала за кермо 4 роки."</em></span>
+          </li>
+          <li><i class="ti ti-quote"></i>
+            <span class="lang lang-cz"><em class="it">„Z jiné autoškoly mě vyhodili. Prý nemám talent."</em></span>
+            <span class="lang lang-ua"><em class="it">„З іншої автошколи мене виключили. Сказали — немає таланту."</em></span>
+          </li>
+          <li><i class="ti ti-quote"></i>
+            <span class="lang lang-cz"><em class="it">„Je mi 58 a všichni mi říkali, ať to nezkouším."</em></span>
+            <span class="lang lang-ua"><em class="it">„Мені 58, і всі казали, щоб я навіть не пробував."</em></span>
+          </li>
+        </ul>
+        <p class="scaredy-foot">
+          <span class="lang lang-cz">Pak udělali řidičák. Většinou napoprvé. <strong>Vy taky můžete.</strong></span>
+          <span class="lang lang-ua">Потім вони отримали права. Зазвичай з першого разу. <strong>Ви теж можете.</strong></span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="section features">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">
+            <span class="lang lang-cz">Proč heleN</span><span class="lang lang-ua">Чому heleN</span>
+          </div>
+          <h2>
+            <span class="lang lang-cz">Autoškola pro <em class="it">lidi.</em><br/>Ne pro statistiky.</span>
+            <span class="lang lang-ua">Автошкола для <em class="it">людей.</em><br/>А не для статистики.</span>
+          </h2>
+        </div>
+        <p class="lead">
+          <span class="lang lang-cz">Nejsme největší v Brně. Jsme ale ta, kde se vrací lidé, kteří jinde ztratili odvahu — a kde se z trémy stane řidičák.</span>
+          <span class="lang lang-ua">Ми не найбільші в Брно. Але саме до нас повертаються ті, хто втратив сміливість деінде — і у кого зі страху народжуються права.</span>
+        </p>
+      </div>
+
+      <div class="feature-grid">
+        <div class="feature">
+          <div class="feature-icon"><i class="ti ti-heart"></i></div>
+          <h3>
+            <span class="lang lang-cz">Empatie na prvním místě</span><span class="lang lang-ua">Емпатія на першому місці</span>
+          </h3>
+          <p>
+            <span class="lang lang-cz">Žádný křik, žádné posměšky. Pochopíme, odkud váš strach pochází — a teprve pak učíme.</span>
+            <span class="lang lang-ua">Жодного крику, жодних насмішок. Спочатку зрозуміємо, звідки ваш страх — і лише потім вчимо.</span>
+          </p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon"><i class="ti ti-clock-pause"></i></div>
+          <h3>
+            <span class="lang lang-cz">Váš vlastní rytmus</span><span class="lang lang-ua">Ваш власний ритм</span>
+          </h3>
+          <p>
+            <span class="lang lang-cz">Pět hodin za den, nebo jedna za měsíc. Sestavíme plán, který sedí vaší hlavě i kalendáři.</span>
+            <span class="lang lang-ua">П'ять годин на день чи одна на місяць. Складемо план, який підходить вашій голові й календарю.</span>
+          </p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon"><i class="ti ti-brain"></i></div>
+          <h3>
+            <span class="lang lang-cz">Psychologický přístup</span><span class="lang lang-ua">Психологічний підхід</span>
+          </h3>
+          <p>
+            <span class="lang lang-cz">Helena má výcvik v práci s úzkostí. Učí vás řídit auto i mysl, která za volantem panikaří.</span>
+            <span class="lang lang-ua">Гелена має підготовку для роботи з тривогою. Вчить керувати авто й розумом, який панікує за кермом.</span>
+          </p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon"><i class="ti ti-users-group"></i></div>
+          <h3>
+            <span class="lang lang-cz">Pro každý věk</span><span class="lang lang-ua">Для будь-якого віку</span>
+          </h3>
+          <p>
+            <span class="lang lang-cz">Studenti, maminky po pauze, padesátníci, šedesátníci. Nezáleží, kdy začínáte — záleží že začínáte.</span>
+            <span class="lang lang-ua">Студенти, мами після перерви, ті, кому 50 чи 60. Неважливо, коли починаєте — важливо, що починаєте.</span>
+          </p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon"><i class="ti ti-shield-check"></i></div>
+          <h3>
+            <span class="lang lang-cz">Bezpečné prostředí</span><span class="lang lang-ua">Безпечне середовище</span>
+          </h3>
+          <p>
+            <span class="lang lang-cz">Vůz s duálním ovládáním, klidné trasy na začátku, postupné zvyšování náročnosti. Bez překvapení.</span>
+            <span class="lang lang-ua">Авто з подвійним керуванням, спокійні маршрути на початку, поступове ускладнення. Без сюрпризів.</span>
+          </p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon"><i class="ti ti-map-pin"></i></div>
+          <h3>
+            <span class="lang lang-cz">Známe Brno</span><span class="lang lang-ua">Знаємо Брно</span>
+          </h3>
+          <p>
+            <span class="lang lang-cz">Z Královopolské na Vídeňskou, z Bystrce do centra. Učíme reálné situace, ne jen „objet okruh".</span>
+            <span class="lang lang-ua">З Краловополе на Віденську, з Бистрце в центр. Вчимо реальні ситуації, а не „проїхати коло".</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Courses preview -->
+  <section class="section courses">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">
+            <span class="lang lang-cz">Kurzy</span><span class="lang lang-ua">Курси</span>
+          </div>
+          <h2>
+            <span class="lang lang-cz">Najděte si <em class="it">své</em> tempo.</span>
+            <span class="lang lang-ua">Знайдіть <em class="it">свій</em> ритм.</span>
+          </h2>
+        </div>
+        <p class="lead">
+          <span class="lang lang-cz">Tři cesty k řidičáku — všechny s individuálními lekcemi a Heleninou neomezenou trpělivostí.</span>
+          <span class="lang lang-ua">Три шляхи до прав — усі з індивідуальними заняттями та необмеженою терплячістю Гелени.</span>
+        </p>
+      </div>
+
+      <div class="course-grid">
+        <div class="course">
+          <span class="course-tag">
+            <span class="lang lang-cz">Nejoblíbenější</span><span class="lang lang-ua">Найпопулярніший</span>
+          </span>
+          <h3>
+            <span class="lang lang-cz">Autoškola 3 měsíce</span><span class="lang lang-ua">Автошкола 3 місяця</span>
+          </h3>
+          <p class="course-desc">
+            <span class="lang lang-cz">Klasický autokurz pro skupinu B s důrazem na klid a porozumění.</span>
+            <span class="lang lang-ua">Класичний автокурс категорії B з акцентом на спокій і розуміння.</span>
+          </p>
+          <ul class="course-features">
+            <li class="course-feature"><i class="ti ti-check"></i>
+              <span class="lang lang-cz">28 hodin výuky jízdy</span><span class="lang lang-ua">28 годин водіння</span>
+            </li>
+            <li class="course-feature"><i class="ti ti-check"></i>
+              <span class="lang lang-cz">Teorie online i prezenčně</span><span class="lang lang-ua">Теорія онлайн та очно</span>
+            </li>
+            <li class="course-feature"><i class="ti ti-check"></i>
+              <span class="lang lang-cz">Konzultace zdarma na úvod</span><span class="lang lang-ua">Безкоштовна консультація</span>
+            </li>
+          </ul>
+          <div class="course-price">22 000 Kč<small>
+            <span class="lang lang-cz">od</span><span class="lang lang-ua">від</span>
+          </small></div>
+          <a href="#" class="btn btn-dark" data-course="Autoškola 3 měsíce" data-nav="contact">
+            <span class="lang lang-cz">Mám zájem</span><span class="lang lang-ua">Цікавить</span>
+            <i class="ti ti-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="course featured">
+          <span class="course-tag">
+            <span class="lang lang-cz">Pro klidnou hlavu</span><span class="lang lang-ua">Для спокійної голови</span>
+          </span>
+          <h3>
+            <span class="lang lang-cz">Autoškola 2 měsíce</span><span class="lang lang-ua">Автошкола 2 місяці</span>
+          </h3>
+          <p class="course-desc">
+            <span class="lang lang-cz">Pro ty, kteří začínají později. Trpělivěji, pomaleji, s respektem k zkušenostem.</span>
+            <span class="lang lang-ua">Для тих, хто починає пізніше. Терплячіше, повільніше, з повагою до досвіду.</span>
+          </p>
+          <ul class="course-features">
+            <li class="course-feature"><i class="ti ti-check"></i>
+              <span class="lang lang-cz">Až 40 hodin jízd</span><span class="lang lang-ua">До 40 годин водіння</span>
+            </li>
+            <li class="course-feature"><i class="ti ti-check"></i>
+              <span class="lang lang-cz">Teorie v menší skupině</span><span class="lang lang-ua">Теорія у малій групі</span>
+            </li>
+            <li class="course-feature"><i class="ti ti-check"></i>
+              <span class="lang lang-cz">Lekce s psychologem zdarma</span><span class="lang lang-ua">Заняття з психологом безкоштовно</span>
+            </li>
+          </ul>
+          <div class="course-price">25 000 Kč<small>
+            <span class="lang lang-cz">od</span><span class="lang lang-ua">від</span>
+          </small></div>
+          <a href="#" class="btn btn-primary" data-course="Autoškola 2 měsíce" data-nav="contact">
+            <span class="lang lang-cz">Mám zájem</span><span class="lang lang-ua">Цікавить</span>
+            <i class="ti ti-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="course">
+          <span class="course-tag">
+            <span class="lang lang-cz">Rychle &amp; klidně</span><span class="lang lang-ua">Швидко й спокійно</span>
+          </span>
+          <h3>
+            <span class="lang lang-cz">Autoškola 1 měsíc</span><span class="lang lang-ua">Автошкола 1 місяць</span>
+          </h3>
+          <p class="course-desc">
+            <span class="lang lang-cz">Pokud potřebujete řidičák brzy a chcete to vzít koncentrovaně — 6 týdnů, malá skupina.</span>
+            <span class="lang lang-ua">Якщо потрібні права швидко й хочеться зосередитися — 6 тижнів, мала група.</span>
+          </p>
+          <ul class="course-features">
+            <li class="course-feature"><i class="ti ti-check"></i>
+              <span class="lang lang-cz">30 hodin jízd ve 6 týdnech</span><span class="lang lang-ua">30 годин водіння за 6 тижнів</span>
+            </li>
+            <li class="course-feature"><i class="ti ti-check"></i>
+              <span class="lang lang-cz">Garance termínu zkoušky</span><span class="lang lang-ua">Гарантія дати іспиту</span>
+            </li>
+            <li class="course-feature"><i class="ti ti-check"></i>
+              <span class="lang lang-cz">Materiály a aplikace zdarma</span><span class="lang lang-ua">Матеріали та застосунок безкоштовно</span>
+            </li>
+          </ul>
+          <div class="course-price">28 000 Kč<small>
+            <span class="lang lang-cz">od</span><span class="lang lang-ua">від</span>
+          </small></div>
+          <a href="#" class="btn btn-dark" data-course="Autoškola 1 měsíc" data-nav="contact">
+            <span class="lang lang-cz">Mám zájem</span><span class="lang lang-ua">Цікавить</span>
+            <i class="ti ti-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section testimonials">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">
+            <span class="lang lang-cz">Co říkají absolventi</span><span class="lang lang-ua">Що кажуть випускники</span>
+          </div>
+          <h2>
+            <span class="lang lang-cz">Strach šel <em class="it">stranou.</em></span>
+            <span class="lang lang-ua">Страх відступив <em class="it">убік.</em></span>
+          </h2>
+        </div>
+        <p class="lead">
+          <span class="lang lang-cz">Příběhy lidí, kteří přišli s tím, že to „asi nezvládnou". A pak to zvládli.</span>
+          <span class="lang lang-ua">Історії людей, які прийшли з думкою „напевно не впораюся". І впоралися.</span>
+        </p>
+      </div>
+
+      <div class="testimonial-grid">
+        <div class="testimonial">
+          <div class="stars">
+            <i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i>
+          </div>
+          <blockquote>
+            <span class="lang lang-cz">„Před Helenou jsem propadla ze zkoušky dvakrát. Plakala jsem v autě. U ní jsem za půl roku udělala řidičák napoprvé — protože jsem konečně necítila, že jsem hloupá."</span>
+            <span class="lang lang-ua">„До Гелени я двічі провалила іспит. Плакала в авто. У неї за пів року склала з першого разу — бо нарешті не відчувала, що я дурна."</span>
+          </blockquote>
+          <div class="testimonial-meta">
+            <div class="avatar">M</div>
+            <div>
+              <strong>Markéta L.</strong>
+              <span>
+                <span class="lang lang-cz">34 let · řidičský průkaz 2025</span>
+                <span class="lang lang-ua">34 роки · права 2025</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial">
+          <div class="stars">
+            <i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i>
+          </div>
+          <blockquote>
+            <span class="lang lang-cz">„V 58 letech jsem si myslel, že už nemá smysl to zkoušet. Helena mi ukázala, že není pozdě — a že trpělivost je víc než šikovnost."</span>
+            <span class="lang lang-ua">„У 58 я думав, що вже немає сенсу пробувати. Гелена показала, що не пізно — і що терплячість важливіша за вправність."</span>
+          </blockquote>
+          <div class="testimonial-meta">
+            <div class="avatar">P</div>
+            <div>
+              <strong>Pavel K.</strong>
+              <span>
+                <span class="lang lang-cz">58 let · 3měsíční kurz</span>
+                <span class="lang lang-ua">58 років · 3-місячний курс</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial">
+          <div class="stars">
+            <i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i>
+          </div>
+          <blockquote>
+            <span class="lang lang-cz">„Po nehodě jsem nemohla 4 roky řídit. Helena se mnou prošla každou křižovatku, kterou jsem se bála. Konečně zase jezdím sama."</span>
+            <span class="lang lang-ua">„Після аварії я 4 роки не могла кермувати. Гелена пройшла зі мною кожне перехрестя, якого я боялася. Нарешті знову їжджу сама."</span>
+          </blockquote>
+          <div class="testimonial-meta">
+            <div class="avatar">J</div>
+            <div>
+              <strong>Jana D.</strong>
+              <span>
+                <span class="lang lang-cz">42 let · kondiční lekce</span>
+                <span class="lang lang-ua">42 роки · поновлювальні заняття</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial">
+          <div class="stars">
+            <i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i>
+          </div>
+          <blockquote>
+            <span class="lang lang-cz">„Intenzivní kurz, který se vůbec necítil intenzivně. Šest týdnů a klid v hlavě. Doporučuju každému, kdo nesnáší tlak jiných autoškol."</span>
+            <span class="lang lang-ua">„Інтенсивний курс, який зовсім не відчувався інтенсивним. Шість тижнів і спокій у голові. Раджу всім, хто не зносить тиску інших автошкіл."</span>
+          </blockquote>
+          <div class="testimonial-meta">
+            <div class="avatar">T</div>
+            <div>
+              <strong>Tomáš V.</strong>
+              <span>
+                <span class="lang lang-cz">26 let · 1měsíční rychlokurz</span>
+                <span class="lang lang-ua">26 років · 1-місячний рапідний курс</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-band">
+    <div class="container cta-inner">
+      <div>
+        <h2>
+          <span class="lang lang-cz">Začněme <em class="it">konzultací.</em><br/>Zdarma. Bez závazku.</span>
+          <span class="lang lang-ua">Почнемо з <em class="it">консультації.</em><br/>Безкоштовно. Без зобов'язань.</span>
+        </h2>
+        <p>
+          <span class="lang lang-cz">30 minut s Helenou — řekneme si, čeho se bojíte, čeho chcete dosáhnout, a jestli si sedneme. Žádný prodej, žádný tlak.</span>
+          <span class="lang lang-ua">30 хвилин з Геленою — поговоримо про те, чого боїтеся, чого хочете досягти, і чи нам разом по дорозі. Без продажів, без тиску.</span>
+        </p>
+      </div>
+      <a href="#" class="btn btn-primary" data-nav="contact">
+        <span class="lang lang-cz">Domluvit konzultaci</span><span class="lang lang-ua">Записатися на консультацію</span>
+        <i class="ti ti-arrow-right"></i>
+      </a>
+    </div>
+  </section>
+</section>
+
+<!-- ===================== ABOUT ===================== -->
+<section class="page" id="page-about" data-screen-label="02 About">
+
+  <div class="about-hero">
+    <div class="container about-hero-grid">
+      <div>
+        <div class="eyebrow">
+          <span class="lang lang-cz">O autoškole</span><span class="lang lang-ua">Про автошколу</span>
+        </div>
+        <h1>
+          <span class="lang lang-cz">Patnáct let učení.<br/>Tisíce hodin <em class="it">naslouchání.</em></span>
+          <span class="lang lang-ua">П'ятнадцять років навчання.<br/>Тисячі годин <em class="it">слухання.</em></span>
+        </h1>
+        <p class="lead mt-md">
+          <span class="lang lang-cz">Helena Harvotová založila autoškolu heleN v roce 2011, po dvanácti letech práce instruktorky ve velké brněnské autoškole. Přišla s jednou myšlenkou: <strong>učit jinak.</strong> Pomalu. S respektem. A pro lidi, které jiné autoškoly už dávno odepsaly.</span>
+          <span class="lang lang-ua">Гелена Гарвотова заснувала автошколу heleN у 2011 році, після дванадцяти років роботи інструкторкою у великій брненській автошколі. Прийшла з однією думкою: <strong>навчати інакше.</strong> Повільно. З повагою. І для тих, кого інші автошколи вже давно списали.</span>
+        </p>
+        <p class="big-quote">
+          <span class="lang lang-cz">„Když přijde někdo, kdo se třese u volantu, neříkám mu — vy se ale bojíte. Říkám mu: já vím, jak to je. Začneme."</span>
+          <span class="lang lang-ua">„Коли приходить хтось, хто тремтить за кермом, я не кажу — ви ж боїтеся. Я кажу: я знаю, як це. Почнемо."</span>
+        </p>
+        <div class="hero-cta">
+          <a href="#" class="btn btn-dark" data-nav="contact">
+            <i class="ti ti-phone"></i>
+            <span class="lang lang-cz">Zavolat Heleně</span><span class="lang lang-ua">Зателефонувати Гелені</span>
+          </a>
+          <a href="#" class="btn btn-ghost" data-nav="courses">
+            <span class="lang lang-cz">Naše kurzy</span><span class="lang lang-ua">Наші курси</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="helena-portrait">
+        <div class="initials">H</div>
+        <div class="badge-floating">
+          <i class="ti ti-award"></i>
+          <div>
+            <strong style="display:block; color: var(--cream); font-weight: 500;">Helena Harvotová</strong>
+            <span style="opacity: .7;">
+              <span class="lang lang-cz">Akreditovaná instruktorka · psychologický výcvik 2018</span>
+              <span class="lang lang-ua">Акредитована інструкторка · психологічна підготовка 2018</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Psych training -->
+  <section class="section psych">
+    <div class="container">
+      <div class="psych-grid">
+        <div>
+          <div class="eyebrow">
+            <span class="lang lang-cz">Psychologický výcvik</span><span class="lang lang-ua">Психологічна підготовка</span>
+          </div>
+          <h2 class="mt-md">
+            <span class="lang lang-cz">Co to <em class="it">konkrétně</em> znamená pro vás?</span>
+            <span class="lang lang-ua">Що це <em class="it">конкретно</em> означає для вас?</span>
+          </h2>
+          <p class="lead mt-md">
+            <span class="lang lang-cz">V roce 2018 dokončila Helena dvouletý výcvik v práci s úzkostnými klienty pod záštitou Českomoravské psychoterapeutické společnosti. Není psychoterapeutka — je instruktorka, která ví, jak se strachem pracovat. V autě i mimo něj.</span>
+            <span class="lang lang-ua">У 2018 році Гелена закінчила дворічну підготовку з роботи з тривожними клієнтами під егідою Чесько-моравського психотерапевтичного товариства. Вона не психотерапевтка — вона інструкторка, яка вміє працювати зі страхом. В авто й поза ним.</span>
+          </p>
+        </div>
+
+        <ul class="psych-list">
+          <li>
+            <div class="psych-icon"><i class="ti ti-wind"></i></div>
+            <div>
+              <h4>
+                <span class="lang lang-cz">Práce s dechem a napětím</span><span class="lang lang-ua">Робота з диханням і напруженням</span>
+              </h4>
+              <p>
+                <span class="lang lang-cz">Než vyjedeme z autoškoly, naučím vás rychlou techniku, jak zklidnit tělo, když panikaří. Zabere 90 sekund.</span>
+                <span class="lang lang-ua">Перш ніж виїхати з автошколи, навчу швидку техніку заспокоєння тіла під час паніки. Займає 90 секунд.</span>
+              </p>
+            </div>
+          </li>
+          <li>
+            <div class="psych-icon"><i class="ti ti-message-circle-heart"></i></div>
+            <div>
+              <h4>
+                <span class="lang lang-cz">Bez hodnocení a kritiky</span><span class="lang lang-ua">Без оцінок і критики</span>
+              </h4>
+              <p>
+                <span class="lang lang-cz">Žádné „to musí jít rychleji" ani „vy to nikdy nepochopíte". Místo toho — co se právě stalo a co s tím.</span>
+                <span class="lang lang-ua">Жодного „треба швидше" чи „ви ніколи не зрозумієте". Натомість — що щойно сталося і що з цим робити.</span>
+              </p>
+            </div>
+          </li>
+          <li>
+            <div class="psych-icon"><i class="ti ti-route"></i></div>
+            <div>
+              <h4>
+                <span class="lang lang-cz">Postupné zvyšování náročnosti</span><span class="lang lang-ua">Поступове ускладнення</span>
+              </h4>
+              <p>
+                <span class="lang lang-cz">Začínáme tam, kde jste. Křižovatky, dálnice, parkování — vše až tehdy, kdy se na to cítíte vy. Ne já.</span>
+                <span class="lang lang-ua">Починаємо там, де ви є. Перехрестя, шосе, паркування — лише тоді, коли ви до цього готові. Не я.</span>
+              </p>
+            </div>
+          </li>
+          <li>
+            <div class="psych-icon"><i class="ti ti-stretching"></i></div>
+            <div>
+              <h4>
+                <span class="lang lang-cz">Pauzy bez výčitek</span><span class="lang lang-ua">Перерви без докорів</span>
+              </h4>
+              <p>
+                <span class="lang lang-cz">Když je toho moc, zastavíme. Vystoupíme, dáme si kávu, vrátíme se. To není ztracený čas — to je součást učení.</span>
+                <span class="lang lang-ua">Коли стає забагато — зупинимося. Вийдемо, вип'ємо кави, повернемося. Це не втрачений час — це частина навчання.</span>
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section class="section team-section" data-screen-label="Tým">
+    <style>
+      .team-section{ background: var(--cream); padding-top: clamp(3rem,5vw,4.5rem); padding-bottom: clamp(3rem,5vw,4.5rem); }
+      .team-grid{ display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; margin-top: 2.5rem; }
+      @media (max-width: 900px){ .team-grid{ grid-template-columns: repeat(2, 1fr); } }
+      @media (max-width: 480px){ .team-grid{ grid-template-columns: 1fr 1fr; } }
+      .team-card{
+        background: var(--cream-2); border: 1px solid var(--line);
+        border-radius: var(--radius-lg); padding: 1.5rem 1rem 1.25rem;
+        display: flex; flex-direction: column; align-items: center; text-align: center;
+        gap: .85rem; transition: transform .2s ease, box-shadow .2s ease;
+      }
+      .team-card:hover{ transform: translateY(-3px); box-shadow: var(--shadow-md); }
+      .team-avatar{
+        width: 110px; height: 110px; border-radius: 50%;
+        display: grid; place-items: center;
+        font-family: var(--serif); font-size: 2.6rem; font-style: italic;
+        color: var(--cream); background: var(--teal-deep);
+        border: 3px solid var(--cream); box-shadow: 0 0 0 1px var(--line);
+        position: relative; overflow: hidden;
+      }
+      .team-avatar.scene{ background: linear-gradient(180deg, #b8e0f5 0%, #b8e0f5 55%, #8bc88e 55%, #6fae72 100%); }
+      .team-avatar.scene::after{ content:""; position: absolute; top: 25%; left: 25%; width: 36px; height: 16px; background: var(--cream); border-radius: 50%; box-shadow: 18px -6px 0 -4px var(--cream); }
+      .team-avatar.dog{ background: #f4f1e8; color: var(--ink); font-size: 2.2rem; }
+      .team-avatar.moto{ background: linear-gradient(160deg, #2a3530 0%, #4a554f 100%); }
+      .team-name{ font-family: var(--sans); font-weight: 600; font-size: 1rem; letter-spacing: .12em; color: var(--ink); margin: 0; text-transform: uppercase; }
+      .team-role{ font-size: .78rem; color: var(--ink-soft); letter-spacing: .04em; margin: 0; }
+    </style>
+    <div class="container">
+      <div class="section-head" style="margin-bottom: 0;">
+        <div>
+          <div class="eyebrow">
+            <span class="lang lang-cz">Tým autoškoly</span><span class="lang lang-ua">Команда автошколи</span>
+          </div>
+          <h2 class="mt-md">
+            <span class="lang lang-cz">Lidé, kteří vás <em class="it">posadí za volant.</em></span>
+            <span class="lang lang-ua">Люди, які посадять <em class="it">вас за кермо.</em></span>
+          </h2>
+        </div>
+        <p class="lead">
+          <span class="lang lang-cz">Malá parta, která za vámi stojí — od prvního telefonu po předání řidičáku. Včetně Berta, který tady má hlavně morální podporu.</span>
+          <span class="lang lang-ua">Невелика команда, яка стоїть за вами — від першого дзвінка до отримання прав. Включно з Берто, який тут переважно для моральної підтримки.</span>
+        </p>
+      </div>
+
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-avatar">H</div>
+          <h4 class="team-name">Helen</h4>
+          <p class="team-role">
+            <span class="lang lang-cz">Učitelka jízd · majitelka</span>
+            <span class="lang lang-ua">Інструкторка · власниця</span>
+          </p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar scene"></div>
+          <h4 class="team-name">Honza</h4>
+          <p class="team-role">
+            <span class="lang lang-cz">Učitel jízd</span>
+            <span class="lang lang-ua">Інструктор</span>
+          </p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar moto">A</div>
+          <h4 class="team-name">Azi</h4>
+          <p class="team-role">
+            <span class="lang lang-cz">Učitel jízd</span>
+            <span class="lang lang-ua">Інструктор</span>
+          </p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">J</div>
+          <h4 class="team-name">Jitka</h4>
+          <p class="team-role">
+            <span class="lang lang-cz">Nábor a plánování jízd</span>
+            <span class="lang lang-ua">Набір та планування занять</span>
+          </p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar dog">🐾</div>
+          <h4 class="team-name">Berto</h4>
+          <p class="team-role">
+            <span class="lang lang-cz">Hlavní psí pohlazení</span>
+            <span class="lang lang-ua">Головний пес-обнімашка</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="section" style="background: var(--cream-2);">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">
+            <span class="lang lang-cz">Naše hodnoty</span><span class="lang lang-ua">Наші цінності</span>
+          </div>
+          <h2>
+            <span class="lang lang-cz">Tři věci, na kterých <em class="it">stojíme.</em></span>
+            <span class="lang lang-ua">Три речі, на яких <em class="it">стоїмо.</em></span>
+          </h2>
+        </div>
+      </div>
+      <div class="value-grid">
+        <div class="value">
+          <div class="num">01</div>
+          <h4>
+            <span class="lang lang-cz">Trpělivost jako standard</span><span class="lang lang-ua">Терплячість як стандарт</span>
+          </h4>
+          <p>
+            <span class="lang lang-cz">Nikdo nikdy neopustí auto s pocitem, že „to musel zvládnout rychleji". Tempo si určujete vy.</span>
+            <span class="lang lang-ua">Ніхто не вийде з авто з відчуттям, що „мав упоратися швидше". Темп задаєте ви.</span>
+          </p>
+        </div>
+        <div class="value">
+          <div class="num">02</div>
+          <h4>
+            <span class="lang lang-cz">Bezpečí před výkonem</span><span class="lang lang-ua">Безпека перед результатом</span>
+          </h4>
+          <p>
+            <span class="lang lang-cz">Když jste v klidu, učíte se. Když jste ve stresu, jen přežíváte. Naše práce je vás udržet v klidu.</span>
+            <span class="lang lang-ua">У спокої — вчитеся. У стресі — лише виживаєте. Наша робота — тримати вас у спокої.</span>
+          </p>
+        </div>
+        <div class="value">
+          <div class="num">03</div>
+          <h4>
+            <span class="lang lang-cz">Pravdivost</span><span class="lang lang-ua">Чесність</span>
+          </h4>
+          <p>
+            <span class="lang lang-cz">Když vidím, že potřebujete víc hodin než průměr, řeknu vám to. A vysvětlím proč. Žádné překvapení na faktuře.</span>
+            <span class="lang lang-ua">Якщо бачу, що вам потрібно більше годин — скажу. І поясню чому. Жодних сюрпризів у рахунку.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Steps -->
+  <section class="section steps">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow" style="color: var(--teal);">
+            <span class="lang lang-cz">Jak to u nás probíhá</span><span class="lang lang-ua">Як це у нас відбувається</span>
+          </div>
+          <h2>
+            <span class="lang lang-cz">Čtyři kroky k <em class="it">řidičáku.</em></span>
+            <span class="lang lang-ua">Чотири кроки до <em class="it">прав.</em></span>
+          </h2>
+        </div>
+        <p class="lead" style="color: rgba(253,252,248,.7);">
+          <span class="lang lang-cz">Žádné překvapení. Tady je celá cesta — od prvního telefonu po předání průkazu.</span>
+          <span class="lang lang-ua">Жодних сюрпризів. Ось увесь шлях — від першого дзвінка до отримання посвідчення.</span>
+        </p>
+      </div>
+      <div class="step-grid">
+        <div class="step">
+          <div class="step-num">01</div>
+          <h4>
+            <span class="lang lang-cz">Konzultace zdarma</span><span class="lang lang-ua">Безкоштовна консультація</span>
+          </h4>
+          <p>
+            <span class="lang lang-cz">30 minut s Helenou — popovídáme si o tom, co vás brzdí a co potřebujete. Bez závazku.</span>
+            <span class="lang lang-ua">30 хвилин з Геленою — поговоримо про те, що вас стримує і чого потребуєте. Без зобов'язань.</span>
+          </p>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <h4>
+            <span class="lang lang-cz">Teorie ve vašem rytmu</span><span class="lang lang-ua">Теорія у вашому ритмі</span>
+          </h4>
+          <p>
+            <span class="lang lang-cz">Online materiály, prezenční lekce v menší skupině, individuální dovysvětlení. Jak vám to sedí.</span>
+            <span class="lang lang-ua">Онлайн-матеріали, очні заняття в малій групі, індивідуальні пояснення. Як вам зручно.</span>
+          </p>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <h4>
+            <span class="lang lang-cz">Praktické jízdy 1:1</span><span class="lang lang-ua">Практичні заняття 1:1</span>
+          </h4>
+          <p>
+            <span class="lang lang-cz">Vždy sama s Helenou. Začínáme na klidných ulicích, postupujeme dle vašeho tempa, ne podle plánu.</span>
+            <span class="lang lang-ua">Завжди наодинці з Геленою. Починаємо на тихих вулицях, рухаємось у вашому темпі, а не за планом.</span>
+          </p>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <h4>
+            <span class="lang lang-cz">Zkoušky &amp; oslava</span><span class="lang lang-ua">Іспити та святкування</span>
+          </h4>
+          <p>
+            <span class="lang lang-cz">Doprovod ke zkoušce, příprava na typické scénáře. A pak — řidičák v ruce a první samostatná jízda.</span>
+            <span class="lang lang-ua">Супровід на іспит, підготовка до типових сценаріїв. А потім — права в руці та перша самостійна поїздка.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</section>
+
+<!-- ===================== COURSES ===================== -->
+<section class="page" id="page-courses" data-screen-label="03 Courses">
+
+  <div class="page-header">
+    <div class="container">
+      <div class="eyebrow" style="color: var(--teal); justify-content: center; display: inline-flex;">
+        <span class="lang lang-cz">Kurzy &amp; ceník</span><span class="lang lang-ua">Курси та ціни</span>
+      </div>
+      <h1 class="mt-md">
+        <span class="lang lang-cz">Tři cesty.<br/><em class="it">Jeden klidný přístup.</em></span>
+        <span class="lang lang-ua">Три шляхи.<br/><em class="it">Один спокійний підхід.</em></span>
+      </h1>
+      <p class="mt-md">
+        <span class="lang lang-cz">Vyberte si kurz, který sedí vašemu životu — nebo si zavolejte a navrhneme vám něco na míru.</span>
+        <span class="lang lang-ua">Оберіть курс, що пасує вашому життю — або зателефонуйте, і ми запропонуємо щось на замовлення.</span>
+      </p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+
+      <!-- Course details -->
+      <div class="course-detail">
+        <div class="course-detail-inner">
+          <div class="course-detail-head">
+            <span class="course-tag">
+              <span class="lang lang-cz">Nejoblíbenější</span><span class="lang lang-ua">Найпопулярніший</span>
+            </span>
+            <h3>
+              <span class="lang lang-cz">Autoškola 3 měsíce</span><span class="lang lang-ua">Автошкола 3 місяця</span>
+            </h3>
+            <p>
+              <span class="lang lang-cz">Klasický autokurz pro skupinu B. Vhodný pro většinu žadatelů — studenty, dospělé i ty, kteří si v teoretické přípravě věří.</span>
+              <span class="lang lang-ua">Класичний автокурс категорії B. Підходить для більшості кандидатів — студентів, дорослих і тих, хто впевнений у теорії.</span>
+            </p>
+          </div>
+          <div class="course-detail-feat">
+            <ul>
+              <li><i class="ti ti-check"></i>
+                <span class="lang lang-cz">28 hodin praktických jízd</span><span class="lang lang-ua">28 годин практичних занять</span>
+              </li>
+              <li><i class="ti ti-check"></i>
+                <span class="lang lang-cz">Teorie online + prezenčně</span><span class="lang lang-ua">Теорія онлайн + очно</span>
+              </li>
+              <li><i class="ti ti-check"></i>
+                <span class="lang lang-cz">Vůz Škoda Scala</span><span class="lang lang-ua">Авто Škoda Scala</span>
+              </li>
+              <li><i class="ti ti-check"></i>
+                <span class="lang lang-cz">Konzultace zdarma</span><span class="lang lang-ua">Безкоштовна консультація</span>
+              </li>
+              <li><i class="ti ti-check"></i>
+                <span class="lang lang-cz">Příprava na zkoušky</span><span class="lang lang-ua">Підготовка до іспитів</span>
+              </li>
+              <li><i class="ti ti-check"></i>
+                <span class="lang lang-cz">Závěrečný doprovod</span><span class="lang lang-ua">Фінальний супровід</span>
+              </li>
+            </ul>
+          </div>
+          <div class="course-detail-cta">
+            <div class="price">22 000 Kč<small>
+              <span class="lang lang-cz">od / celý kurz</span><span class="lang lang-ua">від / весь курс</span>
+            </small></div>
+            <a href="#" class="btn btn-primary" data-course="Autoškola 3 měsíce" data-nav="contact">
+              <span class="lang lang-cz">Mám zájem</span><span class="lang lang-ua">Цікавить</span>
+              <i class="ti ti-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="course-detail">
+        <div class="course-detail-inner">
+          <div class="course-detail-head">
+            <span class="course-tag">
+              <span class="lang lang-cz">Pro klidnou hlavu</span><span class="lang lang-ua">Для спокійної голови</span>
+            </span>
+            <h3>
+              <span class="lang lang-cz">Autoškola 2 měsíce</span><span class="lang lang-ua">Автошкола 2 місяці</span>
+            </h3>
+            <p>
+              <span class="lang lang-cz">Pro ty, kdo začínají později v životě. Více hodin, pomalejší tempo, větší prostor pro otázky a pochybnosti.</span>
+              <span class="lang lang-ua">Для тих, хто починає пізніше. Більше годин, повільніший темп, більше простору для запитань і сумнівів.</span>
+            </p>
+          </div>
+          <div class="course-detail-feat">
+            <ul>
+              <li><i class="ti ti-check"></i>
+                <span class="lang lang-cz">Až 40 hodin jízd</span><span class="lang lang-ua">До 40 годин водіння</span>
+              </li>
+              <li><i class="ti ti-check"></i>
+                <span class="lang lang-cz">Teorie v malé skupině</span><span class="lang lang-ua">Теорія у малій групі</span>
+              </li>
+              <li><i class="ti ti-check"></i>
+                <span class="lang lang-cz">Lekce s psychologem</span><span class="lang lang-ua">Заняття з психологом</span>
+              </li>
+              <li><i class="ti ti-check"></i>
+                <span class="lang lang-cz">Žádný časový tlak</span><span class="lang lang-ua">Без часового тиску</span>
+              </li>
+              <li><i class="ti ti-check"></i>
+                <span class="lang lang-cz">Vlastní rytmus zkoušek</span><span class="lang lang-ua">Власний ритм іспитів</span>
+              </li>
+              <li><i class="ti ti-check"></i>
+                <span class="lang lang-cz">Doprovod od A do Z</span><span class="lang lang-ua">Супровід від А до Я</span>
+              </li>
+            </ul>
+          </div>
+          <div class="course-detail-cta">
+            <div class="price">25 000 Kč<small>
+              <span class="lang lang-cz">od / celý kurz</span><span class="lang lang-ua">від / весь курс</span>
+            </small></div>
+            <a href="#" class="btn btn-primary" data-course="Autoškola 2 měsíce" data-nav="contact">
+              <span class="lang lang-cz">Mám zájem</span><span class="lang lang-ua">Цікавить</span>
+              <i class="ti ti-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="course-detail">
+        <div class="course-detail-inner">
+          <div class="course-detail-head">
+            <span class="course-tag">
+              <span class="lang lang-cz">Rychle &amp; klidně</span><span class="lang lang-ua">Швидко й спокійно</span>
+            </span>
+            <h3>
+              <span class="lang lang-cz">Autoškola 1 měsíc</span><span class="lang lang-ua">Автошкола 1 місяць</span>
+            </h3>
+            <p>
+              <span class="lang lang-cz">Pokud potřebujete řidičák co nejdřív a chcete to vzít soustředěně — 6 týdnů, hustší rozvrh, ale pořád v klidu.</span>
+              <span class="lang lang-ua">Якщо потрібні права якнайшвидше і хочете зосередитися — 6 тижнів, щільніший графік, але все одно спокійно.</span>
+            </p>
+          </div>
+          <div class="course-detail-feat">
+            <ul>
+              <li><i class="ti ti-check"></i>
+                <span class="lang lang-cz">30 hodin jízd / 6 týdnů</span><span class="lang lang-ua">30 годин водіння / 6 тижнів</span>
+              </li>
+              <li><i class="ti ti-check"></i>
+                <span class="lang lang-cz">Online teorie + materiály</span><span class="lang lang-ua">Онлайн-теорія + матеріали</span>
+              </li>
+              <li><i class="ti ti-check"></i>
+                <span class="lang lang-cz">Garance termínu zkoušky</span><span class="lang lang-ua">Гарантія дати іспиту</span>
+              </li>
+              <li><i class="ti ti-check"></i>
+                <span class="lang lang-cz">Aplikace na testy zdarma</span><span class="lang lang-ua">Застосунок для тестів безкоштовно</span>
+              </li>
+              <li><i class="ti ti-check"></i>
+                <span class="lang lang-cz">2 lekce týdně min.</span><span class="lang lang-ua">Мін. 2 заняття на тиждень</span>
+              </li>
+              <li><i class="ti ti-check"></i>
+                <span class="lang lang-cz">Příprava na „ostrý" provoz</span><span class="lang lang-ua">Підготовка до реального трафіку</span>
+              </li>
+            </ul>
+          </div>
+          <div class="course-detail-cta">
+            <div class="price">28 000 Kč<small>
+              <span class="lang lang-cz">od / celý kurz</span><span class="lang lang-ua">від / весь курс</span>
+            </small></div>
+            <a href="#" class="btn btn-primary" data-course="Autoškola 1 měsíc" data-nav="contact">
+              <span class="lang lang-cz">Mám zájem</span><span class="lang lang-ua">Цікавить</span>
+              <i class="ti ti-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fees table -->
+      <div class="mt-lg">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">
+              <span class="lang lang-cz">Poplatky &amp; doplatky</span><span class="lang lang-ua">Збори та доплати</span>
+            </div>
+            <h2>
+              <span class="lang lang-cz">Co je <em class="it">a co není</em> v ceně.</span>
+              <span class="lang lang-ua">Що входить, <em class="it">а що ні</em> в ціну.</span>
+            </h2>
+          </div>
+          <p class="lead">
+            <span class="lang lang-cz">Pro férovost ukazujeme všechno, co se může objevit nad cenou kurzu — i to, co jiné autoškoly schovávají.</span>
+            <span class="lang lang-ua">Заради чесності показуємо все, що може з'явитися поверх ціни курсу — і те, що інші автошколи приховують.</span>
+          </p>
+        </div>
+
+        <div class="fees-table">
+          <table>
+            <thead>
+              <tr>
+                <th><span class="lang lang-cz">Položka</span><span class="lang lang-ua">Позиція</span></th>
+                <th><span class="lang lang-cz">Popis</span><span class="lang lang-ua">Опис</span></th>
+                <th style="text-align: right;"><span class="lang lang-cz">Magistrát</span><span class="lang lang-ua">Магістрат</span></th>
+                <th style="text-align: right;"><span class="lang lang-cz">Autoškola</span><span class="lang lang-ua">Автошкола</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>
+                  <span class="lang lang-cz">První zkouška</span><span class="lang lang-ua">Перший іспит</span>
+                </strong></td>
+                <td><span class="note">
+                  <span class="lang lang-cz">Magistrát města Brna — řádný termín</span><span class="lang lang-ua">Магістрат Брно — стандартний термін</span>
+                </span></td>
+                <td style="text-align: right;"><strong>700 Kč</strong></td>
+                <td style="text-align: right;">
+                  <span class="lang lang-cz">zdarma</span><span class="lang lang-ua">безкошт.</span>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>
+                  <span class="lang lang-cz">Opravná zkouška — test</span><span class="lang lang-ua">Перездача — тест</span>
+                </strong></td>
+                <td><span class="note">
+                  <span class="lang lang-cz">Opakování teoretické části</span><span class="lang lang-ua">Повторення теоретичної частини</span>
+                </span></td>
+                <td style="text-align: right;"><strong>100 Kč</strong></td>
+                <td style="text-align: right;"><strong>300 Kč</strong></td>
+              </tr>
+              <tr>
+                <td><strong>
+                  <span class="lang lang-cz">Opravná zkouška — jízda</span><span class="lang lang-ua">Перездача — водіння</span>
+                </strong></td>
+                <td><span class="note">
+                  <span class="lang lang-cz">Opakování praktické zkoušky</span><span class="lang lang-ua">Повторення практичного іспиту</span>
+                </span></td>
+                <td style="text-align: right;"><strong>400 Kč</strong></td>
+                <td style="text-align: right;"><strong>600 Kč</strong></td>
+              </tr>
+              <tr>
+                <td><strong>
+                  <span class="lang lang-cz">Doplňkový výcvik</span><span class="lang lang-ua">Додатковий вишкіл</span>
+                </strong></td>
+                <td><span class="note">
+                  <span class="lang lang-cz">Dvouhodinovka nad rámec kurzu</span><span class="lang lang-ua">Дводинна заняття понад курс</span>
+                </span></td>
+                <td style="text-align: right;">—</td>
+                <td style="text-align: right;"><strong>1 400 Kč</strong></td>
+              </tr>
+              <tr>
+                <td><strong>
+                  <span class="lang lang-cz">Konzultace s Helenou</span><span class="lang lang-ua">Консультація з Геленою</span>
+                </strong></td>
+                <td><span class="note">
+                  <span class="lang lang-cz">30 min, před zápisem</span><span class="lang lang-ua">30 хв, перед записом</span>
+                </span></td>
+                <td style="text-align: right;">—</td>
+                <td style="text-align: right;">
+                  <span class="lang lang-cz">zdarma</span><span class="lang lang-ua">безкошт.</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <div class="mt-lg">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">
+              <span class="lang lang-cz">Časté otázky</span><span class="lang lang-ua">Часті запитання</span>
+            </div>
+            <h2>
+              <span class="lang lang-cz">Co se nejčastěji <em class="it">ptáte.</em></span>
+              <span class="lang lang-ua">Що ви <em class="it">найчастіше питаєте.</em></span>
+            </h2>
+          </div>
+          <p class="lead">
+            <span class="lang lang-cz">A pokud tu vaši nenajdete — zavolejte. Helena odpovídá osobně.</span>
+            <span class="lang lang-ua">А якщо свого не знайдете — телефонуйте. Гелена відповідає особисто.</span>
+          </p>
+        </div>
+
+        <div class="faq">
+          <div class="faq-item">
+            <button class="faq-q">
+              <span><span class="lang lang-cz">Bojím se. Jsem případ bez naděje?</span><span class="lang lang-ua">Я боюся. Я безнадійний випадок?</span></span>
+              <i class="ti ti-plus"></i>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner">
+              <span class="lang lang-cz">Ne. Devět z deseti našich studentů přišlo s tím samým slovem — bojím se. Strach z řízení je nejčastější důvod, proč se k nám lidé hlásí. Není to slabost, je to signál, že je potřeba učit jinak. A přesně to děláme.</span>
+              <span class="lang lang-ua">Ні. Дев'ять з десяти наших студентів прийшли з тими ж словами — я боюся. Страх перед кермом — найчастіша причина, чому до нас звертаються. Це не слабкість, це сигнал, що треба вчити інакше. Саме це ми й робимо.</span>
+            </div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">
+              <span><span class="lang lang-cz">Jak dlouho kurz reálně trvá?</span><span class="lang lang-ua">Скільки реально триває курс?</span></span>
+              <i class="ti ti-plus"></i>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner">
+              <span class="lang lang-cz">3měsíční (klidný) kurz obvykle 3–5 měsíců, 2měsíční (tak akorát) 2–3 měsíce, 1měsíční intenzivní rychlokurz 4–6 týdnů. Záleží ale především na vás — nepospícháme. Lekce plánujeme po vzájemné domluvě, ne podle tabulky.</span>
+              <span class="lang lang-ua">Стандартний курс B зазвичай 3–5 місяців, курс 50+ часто 5–8 місяців, інтенсивний — 6 тижнів. Але насамперед залежить від вас — ми не поспішаємо. Заняття плануємо за домовленістю, а не за таблицею.</span>
+            </div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">
+              <span><span class="lang lang-cz">Co když propadnu u zkoušky?</span><span class="lang lang-ua">А якщо я провалю іспит?</span></span>
+              <i class="ti ti-plus"></i>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner">
+              <span class="lang lang-cz">Pak to spolu zkusíme znovu. Opravnou zkoušku můžete dělat opakovaně po dobu jednoho roku. Pokud propadnete, nejdříve si dáme kávu, rozebereme co se stalo, případně přidáme pár hodin — a jdeme znovu. Bez výčitek.</span>
+              <span class="lang lang-ua">Тоді спробуємо знову. Повторний іспит можна складати кілька разів протягом року. Якщо провалите — спочатку вип'ємо кави, розберемо що сталося, можливо додамо кілька годин — і йдемо знову. Без докорів.</span>
+            </div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">
+              <span><span class="lang lang-cz">Můžu řídit i po nehodě nebo dlouhé pauze?</span><span class="lang lang-ua">Чи можу водити після аварії або довгої перерви?</span></span>
+              <i class="ti ti-plus"></i>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner">
+              <span class="lang lang-cz">Ano — to je vlastně naše specializace. Kondiční jízdy pro lidi po nehodě, po letech bez auta, nebo po stresující zkušenosti jsou velkou částí naší práce. Žádný kurz znovu, jen tolik hodin, kolik potřebujete na obnovení sebedůvěry.</span>
+              <span class="lang lang-ua">Так — це фактично наша спеціалізація. Поновлювальні заняття для людей після аварії, після років без авто чи після стресового досвіду — велика частина нашої роботи. Жодного нового курсу, лише стільки годин, скільки потрібно для відновлення впевненості.</span>
+            </div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">
+              <span><span class="lang lang-cz">Jsou hodiny vždy 1:1, nebo s někým jiným v autě?</span><span class="lang lang-ua">Заняття завжди 1:1, чи з кимось ще в авто?</span></span>
+              <i class="ti ti-plus"></i>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner">
+              <span class="lang lang-cz">Vždy jen vy a Helena. Nikoho dalšího nikdy nebudeme do auta sázet bez vašeho souhlasu. Soukromí a klid jsou pro učení zásadní — proto je nikdy nesnižujeme.</span>
+              <span class="lang lang-ua">Завжди лише ви і Гелена. Нікого більше в авто без вашої згоди. Приватність і спокій важливі для навчання — тому ми їх не зменшуємо.</span>
+            </div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">
+              <span><span class="lang lang-cz">Můžu skládat testy v ukrajinštině?</span><span class="lang lang-ua">Чи можу складати тести українською?</span></span>
+              <i class="ti ti-plus"></i>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner">
+              <span class="lang lang-cz">Ano. Testy lze skládat v češtině, ukrajinštině i ruštině. Materiály vám zapůjčíme v jazyce, který vám sedne nejvíc, a Helena teorii dovysvětlí osobně — případně se domluvíme na tlumočníkovi pro praktické jízdy.</span>
+              <span class="lang lang-ua">Так. Тести можна складати чеською, українською та російською. Матеріали надамо мовою, яка вам найзручніша, а Гелена особисто пояснить теорію — за потреби домовимося про перекладача для практичних занять.</span>
+            </div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-band">
+    <div class="container cta-inner">
+      <div>
+        <h2>
+          <span class="lang lang-cz">Nemůžete se <em class="it">rozhodnout?</em></span>
+          <span class="lang lang-ua">Не можете <em class="it">вирішити?</em></span>
+        </h2>
+        <p>
+          <span class="lang lang-cz">Zavolejte. Třicet minut konzultace, žádný závazek — a budete vědět, který kurz vám sedne.</span>
+          <span class="lang lang-ua">Зателефонуйте. Тридцять хвилин консультації, без зобов'язань — і зрозумієте, який курс вам пасує.</span>
+        </p>
+      </div>
+      <a href="#" class="btn btn-primary" data-nav="contact">
+        <span class="lang lang-cz">Domluvit konzultaci</span><span class="lang lang-ua">Записатися на консультацію</span>
+        <i class="ti ti-arrow-right"></i>
+      </a>
+    </div>
+  </section>
+
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section class="page" id="page-contact" data-screen-label="04 Contact">
+
+  <div class="page-header">
+    <div class="container">
+      <div class="eyebrow" style="color: var(--teal); justify-content: center; display: inline-flex;">
+        <span class="lang lang-cz">Kontakt</span><span class="lang lang-ua">Контакти</span>
+      </div>
+      <h1 class="mt-md">
+        <span class="lang lang-cz">Napište nebo zavolejte.<br/><em class="it">Helena to vezme osobně.</em></span>
+        <span class="lang lang-ua">Напишіть або зателефонуйте.<br/><em class="it">Гелена відповість особисто.</em></span>
+      </h1>
+      <p class="mt-md">
+        <span class="lang lang-cz">Stačí pár vět o tom, co vás trápí — ozveme se zpravidla do 24 hodin a domluvíme bezplatnou konzultaci.</span>
+        <span class="lang lang-ua">Достатньо кількох слів про те, що вас турбує — відповідаємо зазвичай протягом 24 годин і домовляємось про безкоштовну консультацію.</span>
+      </p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container contact-grid">
+
+      <!-- Form -->
+      <div class="contact-form">
+        <form id="contactForm" novalidate>
+          <div class="form-row split">
+            <div>
+              <label for="f-name">
+                <span class="lang lang-cz">Vaše jméno</span><span class="lang lang-ua">Ваше ім'я</span>
+                <span class="req">*</span>
+              </label>
+              <input type="text" id="f-name" name="name" required
+                data-ph-cz="Jana Nováková" data-ph-ua="Ольга Іваненко" placeholder="Jana Nováková" />
+              <div class="form-error">
+                <span class="lang lang-cz">Prosíme, vyplňte své jméno.</span>
+                <span class="lang lang-ua">Будь ласка, вкажіть ім'я.</span>
+              </div>
+            </div>
+            <div>
+              <label for="f-phone">
+                <span class="lang lang-cz">Telefon</span><span class="lang lang-ua">Телефон</span>
+                <span class="req">*</span>
+              </label>
+              <input type="tel" id="f-phone" name="phone" required
+                data-ph-cz="+420 ..." data-ph-ua="+380 ..." placeholder="+420 ..." />
+              <div class="form-error">
+                <span class="lang lang-cz">Zadejte prosím platné telefonní číslo.</span>
+                <span class="lang lang-ua">Введіть, будь ласка, дійсний телефон.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="f-email">
+              <span class="lang lang-cz">E-mail</span><span class="lang lang-ua">Електронна пошта</span>
+              <span class="req">*</span>
+            </label>
+            <input type="email" id="f-email" name="email" required
+              data-ph-cz="jana@email.cz" data-ph-ua="olha@email.ua" placeholder="jana@email.cz" />
+            <div class="form-error">
+              <span class="lang lang-cz">Zadejte prosím platný e-mail.</span>
+              <span class="lang lang-ua">Введіть, будь ласка, дійсний e-mail.</span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="f-course">
+              <span class="lang lang-cz">Mám zájem o</span><span class="lang lang-ua">Цікавить</span>
+            </label>
+            <select id="f-course" name="course">
+              <option value="" data-cz="— Vyberte (nepovinné) —" data-ua="— Оберіть (необов'язково) —">— Vyberte (nepovinné) —</option>
+              <option value="Autoškola 3 měsíce" data-cz="Autoškola 3 měsíce (22 000 Kč)" data-ua="Автошкола 3 місяця (24 000 Kč)">Autoškola 3 měsíce (22 000 Kč)</option>
+              <option value="Autoškola 2 měsíce" data-cz="Autoškola 2 měsíce (25 000 Kč)" data-ua="Автошкола 2 місяці (27 000 Kč)">Autoškola 2 měsíce (25 000 Kč)</option>
+              <option value="Autoškola 1 měsíc" data-cz="Autoškola 1 měsíc — intenzivní (28 000 Kč)" data-ua="Автошкола 1 місяць — інтенсив (30 000 Kč)">Autoškola 1 měsíc — intenzivní (28 000 Kč)</option>
+              <option value="Strašpytlíci" data-cz="Pro strašpytlíky (25 000 — 28 000 Kč)" data-ua="Для боягузів (25 000 — 28 000 Kč)">Pro strašpytlíky (25 000 — 28 000 Kč)</option>
+              <option value="Kondiční jízdy" data-cz="Kondiční jízdy" data-ua="Поновлювальні заняття">Kondiční jízdy</option>
+              <option value="Nevím, poradíte mi" data-cz="Nevím — poradíte mi" data-ua="Не знаю — порадите">Nevím — poradíte mi</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="f-message">
+              <span class="lang lang-cz">Co vás trápí?</span><span class="lang lang-ua">Що вас турбує?</span>
+              <span class="req">*</span>
+            </label>
+            <textarea id="f-message" name="message" rows="5" required
+              data-ph-cz="Bojím se křižovatek, mám za sebou nehodu, neudělala jsem zkoušku jinde..."
+              data-ph-ua="Боюся перехресть, була аварія, не склала іспит деінде..."
+              placeholder="Bojím se křižovatek, mám za sebou nehodu, neudělala jsem zkoušku jinde..."></textarea>
+            <div class="form-error">
+              <span class="lang lang-cz">Napište nám prosím alespoň pár slov.</span>
+              <span class="lang lang-ua">Напишіть, будь ласка, хоча б кілька слів.</span>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary form-submit">
+            <span class="lang lang-cz">Odeslat poptávku</span><span class="lang lang-ua">Надіслати запит</span>
+            <i class="ti ti-send"></i>
+          </button>
+          <p class="form-note">
+            <span class="lang lang-cz">Ozveme se vám zpravidla do 24 hodin. Vaše údaje neukládáme nikam mimo tuto poptávku.</span>
+            <span class="lang lang-ua">Відповідаємо зазвичай протягом 24 годин. Ваші дані ніде не зберігаємо поза цим запитом.</span>
+          </p>
+        </form>
+
+        <div class="form-success" id="formSuccess">
+          <div class="success-icon"><i class="ti ti-check"></i></div>
+          <h3>
+            <span class="lang lang-cz">Děkujeme. Ozveme se vám.</span><span class="lang lang-ua">Дякуємо. Зв'яжемося з вами.</span>
+          </h3>
+          <p>
+            <span class="lang lang-cz">Vaše zpráva dorazila k Heleně. Obvykle odpovídáme do 24 hodin, často mnohem dřív.</span>
+            <span class="lang lang-ua">Ваше повідомлення надійшло Гелені. Зазвичай відповідаємо протягом 24 годин, часто значно швидше.</span>
+          </p>
+          <button class="btn btn-ghost" id="resetForm" type="button">
+            <i class="ti ti-refresh"></i>
+            <span class="lang lang-cz">Poslat další zprávu</span><span class="lang lang-ua">Надіслати ще раз</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Info -->
+      <div class="contact-info">
+        <h3>
+          <span class="lang lang-cz">Najdete nás <em class="it">v Brně.</em></span>
+          <span class="lang lang-ua">Знайдете нас <em class="it">у Брно.</em></span>
+        </h3>
+        <ul class="contact-list">
+          <li>
+            <div class="icon"><i class="ti ti-phone"></i></div>
+            <a href="tel:+420739122002">
+              <div class="label">
+                <span class="lang lang-cz">Telefon</span><span class="lang lang-ua">Телефон</span>
+              </div>
+              <div class="value">+420 739 122 002</div>
+            </a>
+          </li>
+          <li>
+            <div class="icon"><i class="ti ti-mail"></i></div>
+            <a href="/cdn-cgi/l/email-protection#f6be939a9398b7838299859d999a97b6919b979f9ad8958c">
+              <div class="label">
+                <span class="lang lang-cz">E-mail</span><span class="lang lang-ua">Електронна пошта</span>
+              </div>
+              <div class="value"><span class="__cf_email__" data-cfemail="a1e9c4cdc4cfe0d4d5ced2cacecdc0e1c6ccc0c8cd8fc2db">[email&#160;protected]</span></div>
+            </a>
+          </li>
+          <li>
+            <div class="icon"><i class="ti ti-map-pin"></i></div>
+            <div>
+              <div class="label">
+                <span class="lang lang-cz">Adresa</span><span class="lang lang-ua">Адреса</span>
+              </div>
+              <div class="value">Hybešova 38/105, 602 00 Brno</div>
+            </div>
+          </li>
+          <li>
+            <div class="icon"><i class="ti ti-language"></i></div>
+            <div>
+              <div class="label">
+                <span class="lang lang-cz">Domluvíme se</span><span class="lang lang-ua">Спілкуємось</span>
+              </div>
+              <div class="value">
+                <span class="lang lang-cz">Česky · Ukrajinsky · Rusky · Anglicky</span>
+                <span class="lang lang-ua">Чеською · Українською · Російською · Англійською</span>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+        <div class="map-placeholder">
+          <div class="map-pin"><i class="ti ti-map-pin-filled"></i></div>
+          <div class="map-caption">
+            <span><strong>Hybešova 38/105</strong> · Brno</span>
+            <i class="ti ti-external-link"></i>
+          </div>
+        </div>
+
+        <h3 class="mt-lg">
+          <span class="lang lang-cz">Otevírací <em class="it">doba.</em></span>
+          <span class="lang lang-ua">Робочі <em class="it">години.</em></span>
+        </h3>
+        <div class="hours">
+          <div class="hours-row">
+            <span><span class="lang lang-cz">Pondělí</span><span class="lang lang-ua">Понеділок</span></span>
+            <span>8:00 – 18:00</span>
+          </div>
+          <div class="hours-row">
+            <span><span class="lang lang-cz">Úterý</span><span class="lang lang-ua">Вівторок</span></span>
+            <span>8:00 – 18:00</span>
+          </div>
+          <div class="hours-row">
+            <span><span class="lang lang-cz">Středa</span><span class="lang lang-ua">Середа</span></span>
+            <span>8:00 – 18:00</span>
+          </div>
+          <div class="hours-row">
+            <span><span class="lang lang-cz">Čtvrtek</span><span class="lang lang-ua">Четвер</span></span>
+            <span>8:00 – 18:00</span>
+          </div>
+          <div class="hours-row">
+            <span><span class="lang lang-cz">Pátek</span><span class="lang lang-ua">П'ятниця</span></span>
+            <span>8:00 – 16:00</span>
+          </div>
+          <div class="hours-row">
+            <span><span class="lang lang-cz">Sobota</span><span class="lang lang-ua">Субота</span></span>
+            <span><span class="lang lang-cz">dle domluvy</span><span class="lang lang-ua">за домовленістю</span></span>
+          </div>
+          <div class="hours-row">
+            <span><span class="lang lang-cz">Neděle</span><span class="lang lang-ua">Неділя</span></span>
+            <span><span class="lang lang-cz">zavřeno</span><span class="lang lang-ua">зачинено</span></span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</section>
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="logo">helen<span class="dot">.</span><small>
+          <span class="lang lang-cz">autoškola Brno</span><span class="lang lang-ua">автошкола Брно</span>
+        </small></div>
+        <p style="max-width: 38ch; margin-top: .5rem;">
+          <span class="lang lang-cz">Autoškola pro lidi, kteří se bojí. Patnáct let praxe, psychologický výcvik, jedna instruktorka. Žádný křik.</span>
+          <span class="lang lang-ua">Автошкола для тих, хто боїться. П'ятнадцять років практики, психологічна підготовка, одна інструкторка. Жодного крику.</span>
+        </p>
+      </div>
+      <div>
+        <h4><span class="lang lang-cz">Stránky</span><span class="lang lang-ua">Сторінки</span></h4>
+        <ul>
+          <li><a href="#" data-nav="home"><span class="lang lang-cz">Domů</span><span class="lang lang-ua">Головна</span></a></li>
+          <li><a href="#" data-nav="about"><span class="lang lang-cz">O nás</span><span class="lang lang-ua">Про нас</span></a></li>
+          <li><a href="#" data-nav="courses"><span class="lang lang-cz">Kurzy &amp; ceník</span><span class="lang lang-ua">Курси та ціни</span></a></li>
+          <li><a href="#" data-nav="contact"><span class="lang lang-cz">Kontakt</span><span class="lang lang-ua">Контакти</span></a></li>
+        </ul>
+      </div>
+      <div>
+        <h4><span class="lang lang-cz">Kontakt</span><span class="lang lang-ua">Контакти</span></h4>
+        <ul>
+          <li><a href="tel:+420739122002">+420 739 122 002</a></li>
+          <li><a href="/cdn-cgi/l/email-protection#337b565f565d7246475c40585c5f5273545e525a5f1d5049">HelenAutoskola@<br/>gmail.cz</a></li>
+          <li>Hybešova 38/105, Brno</li>
+        </ul>
+      </div>
+      <div>
+        <h4><span class="lang lang-cz">Otevřeno</span><span class="lang lang-ua">Відкрито</span></h4>
+        <ul>
+          <li><span class="lang lang-cz">Po – Čt &nbsp; 8:00 – 18:00</span><span class="lang lang-ua">Пн – Чт &nbsp; 8:00 – 18:00</span></li>
+          <li><span class="lang lang-cz">Pá &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 8:00 – 16:00</span><span class="lang lang-ua">Пт &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 8:00 – 16:00</span></li>
+          <li><span class="lang lang-cz">So &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dle domluvy</span><span class="lang lang-ua">Сб &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; за домовленістю</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Autoškola heleN · Helena Harvotová · IČO 12345678</span>
+      <span>
+        <span class="lang lang-cz">Vytvořeno s <span class="deco-mark">·</span> klidem v Brně</span>
+        <span class="lang lang-ua">Створено зі <span class="deco-mark">·</span> спокоєм у Брно</span>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== COOKIE CONSENT ===================== -->
+<div class="ck-root" id="cookieConsent" hidden>
+  <div class="ck-scrim" id="ckScrim"></div>
+  <div class="ck-panel" role="dialog" aria-modal="true" aria-labelledby="ckTitle">
+    <span class="ck-pill"><i class="ti ti-cookie"></i><span class="lang lang-cz">Sušenky</span><span class="lang lang-ua">Печиво</span></span>
+    <h4 class="ck-title" id="ckTitle">
+      <span class="lang lang-cz">Pár <span class="it">drobků</span> pro lepší web</span>
+      <span class="lang lang-ua">Кілька <span class="it">крихт</span> для кращого сайту</span>
+    </h4>
+    <p class="ck-text">
+      <span class="lang lang-cz">Cookies nám pomáhají, aby vám web jezdil hladce. Vy řídíte — přijměte vše, nebo si vyberte.</span>
+      <span class="lang lang-ua">Cookies допомагають сайту працювати гладко. Ви за кермом — прийміть усе або оберіть самі.</span>
+    </p>
+
+    <div class="ck-opt">
+      <div>
+        <div class="ck-ot"><span class="lang lang-cz">Nezbytné</span><span class="lang lang-ua">Необхідні</span></div>
+        <div class="ck-od"><span class="lang lang-cz">Aby web vůbec fungoval — formuláře, jazyk, bezpečnost.</span><span class="lang lang-ua">Щоб сайт працював — форми, мова, безпека.</span></div>
+      </div>
+      <span class="ck-req"><span class="lang lang-cz">Vždy</span><span class="lang lang-ua">Завжди</span></span>
+    </div>
+    <div class="ck-opt">
+      <div>
+        <div class="ck-ot"><span class="lang lang-cz">Analytické</span><span class="lang lang-ua">Аналітичні</span></div>
+        <div class="ck-od"><span class="lang lang-cz">Anonymně měří návštěvnost, ať víme, co zlepšit.</span><span class="lang lang-ua">Анонімно вимірюють відвідуваність, щоб ми знали, що покращити.</span></div>
+      </div>
+      <label class="ck-tg"><input type="checkbox" id="ckAnalytics"><span class="track"></span><span class="knob"></span></label>
+    </div>
+    <div class="ck-opt">
+      <div>
+        <div class="ck-ot"><span class="lang lang-cz">Marketingové</span><span class="lang lang-ua">Маркетингові</span></div>
+        <div class="ck-od"><span class="lang lang-cz">Relevantní nabídky kurzů na sociálních sítích.</span><span class="lang lang-ua">Релевантні пропозиції курсів у соцмережах.</span></div>
+      </div>
+      <label class="ck-tg"><input type="checkbox" id="ckMarketing"><span class="track"></span><span class="knob"></span></label>
+    </div>
+
+    <div class="ck-actions">
+      <button class="btn btn-ghost" id="ckOnlyNecessary" type="button"><span class="lang lang-cz">Jen nezbytné</span><span class="lang lang-ua">Лише необхідні</span></button>
+      <button class="btn btn-primary" id="ckAccept" type="button">
+        <span class="lang lang-cz" data-ck-all="Přijmout vše" data-ck-save="Uložit výběr">Přijmout vše</span>
+        <span class="lang lang-ua" data-ck-all="Прийняти все" data-ck-save="Зберегти вибір">Прийняти все</span>
+      </button>
+    </div>
+    <div class="ck-foot">
+      <a href="#" data-nav="contact"><span class="lang lang-cz">Zásady ochrany soukromí</span><span class="lang lang-ua">Політика конфіденційності</span></a>
+    </div>
+  </div>
+</div>
+<button class="ck-fab" id="cookieFab" type="button" hidden aria-label="Nastavení cookies"><i class="ti ti-cookie"></i></button>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  /* =================== Language toggle =================== */
+  const LANG_KEY = 'helen.lang';
+  const LANG_MAP = { cs: 'cs', ua: 'uk' };  // html lang attr
+
+  function applyLang(lang){
+    if(lang !== 'cs' && lang !== 'ua') lang = 'cs';
+    document.body.setAttribute('data-lang', lang);
+    document.documentElement.setAttribute('lang', LANG_MAP[lang] || 'cs');
+    // toggle buttons
+    document.querySelectorAll('[data-set-lang]').forEach(b=>{
+      b.classList.toggle('active', b.dataset.setLang === lang);
+    });
+    // placeholders
+    document.querySelectorAll('[data-ph-cz]').forEach(el=>{
+      const ph = lang === 'ua' ? el.dataset.phUa : el.dataset.phCz;
+      if(ph) el.placeholder = ph;
+    });
+    // select options
+    document.querySelectorAll('option[data-cz]').forEach(opt=>{
+      const txt = lang === 'ua' ? opt.dataset.ua : opt.dataset.cz;
+      if(txt) opt.textContent = txt;
+    });
+    try { localStorage.setItem(LANG_KEY, lang); } catch(e){}
+  }
+
+  // wire toggle buttons
+  document.querySelectorAll('[data-set-lang]').forEach(btn=>{
+    btn.addEventListener('click', ()=> applyLang(btn.dataset.setLang));
+  });
+
+  // init from storage
+  let storedLang = 'cs';
+  try { storedLang = localStorage.getItem(LANG_KEY) || 'cs'; } catch(e){}
+  applyLang(storedLang);
+
+  /* =================== Navigation =================== */
+  const pages = {
+    home:    document.getElementById('page-home'),
+    about:   document.getElementById('page-about'),
+    courses: document.getElementById('page-courses'),
+    contact: document.getElementById('page-contact')
+  };
+
+  function setActiveNav(target){
+    document.querySelectorAll('.nav a, .mobile-menu a').forEach(a=>{
+      a.classList.toggle('active', a.dataset.nav === target);
+    });
+  }
+
+  function navigate(target, opts={}){
+    if(!pages[target]) return;
+    Object.entries(pages).forEach(([k, el])=>{
+      el.classList.toggle('active', k===target);
+    });
+    setActiveNav(target);
+    window.scrollTo({ top: 0, behavior: opts.instant ? 'auto' : 'smooth' });
+    document.getElementById('mobileMenu').classList.remove('open');
+    document.getElementById('burger').querySelector('i').className = 'ti ti-menu-2';
+    if(history.replaceState){
+      history.replaceState(null, '', '#' + target);
+    }
+  }
+
+  document.querySelectorAll('[data-nav]').forEach(a=>{
+    a.addEventListener('click', e=>{
+      e.preventDefault();
+      const target = a.dataset.nav;
+      if(a.dataset.course){
+        sessionStorage.setItem('prefillCourse', a.dataset.course);
+      }
+      navigate(target);
+    });
+  });
+
+  // mobile menu toggle
+  const burger = document.getElementById('burger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', ()=>{
+    const isOpen = mobileMenu.classList.toggle('open');
+    burger.querySelector('i').className = isOpen ? 'ti ti-x' : 'ti ti-menu-2';
+  });
+
+  // hash on load
+  const initial = (location.hash || '').replace('#','');
+  if(initial && pages[initial]){
+    navigate(initial, {instant:true});
+  }
+
+  /* =================== FAQ =================== */
+  document.querySelectorAll('.faq-q').forEach(q=>{
+    q.addEventListener('click', ()=>{
+      const item = q.parentElement;
+      const wasOpen = item.classList.contains('open');
+      item.parentElement.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+      if(!wasOpen) item.classList.add('open');
+    });
+  });
+
+  /* =================== Form =================== */
+  const form = document.getElementById('contactForm');
+  const formSuccess = document.getElementById('formSuccess');
+  const courseSelect = document.getElementById('f-course');
+
+  function applyPrefill(){
+    const stored = sessionStorage.getItem('prefillCourse');
+    if(stored && courseSelect){
+      let exists = false;
+      [...courseSelect.options].forEach(o=>{ if(o.value === stored) exists = true; });
+      if(exists){
+        courseSelect.value = stored;
+        const msg = document.getElementById('f-message');
+        const isUa = document.body.getAttribute('data-lang') === 'ua';
+        if(msg && !msg.value){
+          msg.value = isUa
+            ? `Мене цікавить курс „${stored}". `
+            : `Mám zájem o kurz „${stored}". `;
+        }
+      }
+      sessionStorage.removeItem('prefillCourse');
+    }
+  }
+
+  const observer = new MutationObserver(()=>{
+    if(pages.contact.classList.contains('active')) applyPrefill();
+  });
+  observer.observe(pages.contact, { attributes:true, attributeFilter:['class'] });
+
+  function setError(input, hasError){
+    input.closest('.form-row').classList.toggle('error', hasError);
+  }
+  function validEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+  function validPhone(v){ return /^[\d\s+()-]{9,}$/.test(v); }
+
+  form.addEventListener('submit', e=>{
+    e.preventDefault();
+    const name = form.name.value.trim();
+    const phone = form.phone.value.trim();
+    const email = form.email.value.trim();
+    const message = form.message.value.trim();
+
+    let valid = true;
+    if(name.length < 2){ setError(form.name, true); valid = false; } else setError(form.name, false);
+    if(!validPhone(phone)){ setError(form.phone, true); valid = false; } else setError(form.phone, false);
+    if(!validEmail(email)){ setError(form.email, true); valid = false; } else setError(form.email, false);
+    if(message.length < 5){ setError(form.message, true); valid = false; } else setError(form.message, false);
+
+    if(valid){
+      form.style.display = 'none';
+      formSuccess.classList.add('show');
+    } else {
+      const firstErr = form.querySelector('.form-row.error input, .form-row.error textarea');
+      if(firstErr) firstErr.focus();
+    }
+  });
+
+  document.getElementById('resetForm').addEventListener('click', ()=>{
+    form.reset();
+    form.querySelectorAll('.form-row.error').forEach(r=>r.classList.remove('error'));
+    form.style.display = '';
+    formSuccess.classList.remove('show');
+  });
+
+  form.querySelectorAll('input, textarea, select').forEach(el=>{
+    el.addEventListener('input', ()=> setError(el, false));
+  });
+
+  /* =================== Cookie consent =================== */
+  (function(){
+    const CK_KEY = 'helen.cookies';
+    const root = document.getElementById('cookieConsent');
+    const fab = document.getElementById('cookieFab');
+    const scrim = document.getElementById('ckScrim');
+    const analytics = document.getElementById('ckAnalytics');
+    const marketing = document.getElementById('ckMarketing');
+    const acceptBtn = document.getElementById('ckAccept');
+    const onlyBtn = document.getElementById('ckOnlyNecessary');
+    if(!root) return;
+
+    function readPrefs(){
+      try { return JSON.parse(localStorage.getItem(CK_KEY)); } catch(e){ return null; }
+    }
+    function savePrefs(p){
+      try { localStorage.setItem(CK_KEY, JSON.stringify({ ...p, ts: Date.now() })); } catch(e){}
+    }
+    // Primary button morphs: "Přijmout vše" -> "Uložit výběr" once a toggle is touched
+    let touched = false;
+    function refreshAcceptLabel(){
+      acceptBtn.querySelectorAll('.lang').forEach(s=>{
+        s.textContent = touched ? s.dataset.ckSave : s.dataset.ckAll;
+      });
+    }
+    function markTouched(){ touched = true; refreshAcceptLabel(); }
+    analytics.addEventListener('change', markTouched);
+    marketing.addEventListener('change', markTouched);
+
+    function open(prefs){
+      if(prefs){ analytics.checked = !!prefs.analytics; marketing.checked = !!prefs.marketing; }
+      touched = false; refreshAcceptLabel();
+      root.hidden = false;
+      requestAnimationFrame(()=> root.classList.add('show'));
+    }
+    function close(){
+      root.classList.remove('show');
+      setTimeout(()=>{ root.hidden = true; }, 360);
+      fab.hidden = false;
+    }
+    function decide(prefs){ savePrefs(prefs); close(); }
+
+    acceptBtn.addEventListener('click', ()=>{
+      // untouched = accept all; touched = save current toggle selection
+      if(touched) decide({ necessary:true, analytics: analytics.checked, marketing: marketing.checked });
+      else decide({ necessary:true, analytics:true, marketing:true });
+    });
+    onlyBtn.addEventListener('click', ()=> decide({ necessary:true, analytics:false, marketing:false }));
+    fab.addEventListener('click', ()=> open(readPrefs()));
+
+    // init
+    const existing = readPrefs();
+    if(!existing){
+      // first visit — show after a short beat so the page settles
+      setTimeout(()=> open(null), 900);
+    } else {
+      fab.hidden = false;
+    }
+  })();
+</script>
+</body>
+</html>
