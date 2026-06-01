@@ -731,38 +731,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .contact-list .value{ font-size: 1rem; color: var(--ink); }
   .contact-list a:hover .value{ color: var(--teal-deep); }
 
-  .map-placeholder{
+  .map-wrap{
     aspect-ratio: 16/10; border-radius: var(--radius);
-    background:
-      radial-gradient(circle at 50% 40%, rgba(255,255,255,.4), transparent 60%),
-      linear-gradient(135deg, #BFD9EC 0%, #2D86C4 60%, var(--teal-deep) 100%);
-    position: relative; display: grid; place-items: center;
-    overflow: hidden;
+    position: relative; overflow: hidden;
     border: 1px solid var(--line);
+    background: var(--cream-2);
   }
-  .map-placeholder::before{
-    content:""; position: absolute; inset:0;
-    background-image:
-      linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
-    background-size: 32px 32px;
+  .map-wrap iframe{
+    width: 100%; height: 100%; border: 0; display: block;
   }
-  .map-pin{
-    position: relative; z-index: 1;
-    width: 56px; height: 56px; border-radius: 50% 50% 50% 0;
-    background: var(--ink); transform: rotate(-45deg);
-    display: grid; place-items: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,.25);
+  .map-open-link{
+    position: absolute; bottom: .75rem; right: .75rem;
+    background: var(--ink); color: var(--cream);
+    padding: .4rem .85rem; border-radius: 2rem;
+    font-size: .8rem; font-weight: 500;
+    display: flex; align-items: center; gap: .4rem;
+    text-decoration: none; box-shadow: 0 2px 8px rgba(0,0,0,.25);
+    transition: background .2s;
   }
-  .map-pin .ti{ transform: rotate(45deg); color: var(--teal); font-size: 1.5rem; }
-  .map-caption{
-    position: absolute; bottom: 1rem; left: 1rem; right: 1rem;
-    background: rgba(253,252,248,.95); padding: .65rem .9rem;
-    border-radius: 10px; font-size: .85rem; color: var(--ink);
-    display: flex; justify-content: space-between; align-items: center;
-    backdrop-filter: blur(6px);
-  }
-  .map-caption .ti{ color: var(--teal-deep); }
+  .map-open-link:hover{ background: var(--teal-deep); }
 
   .form-success{ display: none; text-align: center; padding: 2rem 1rem; }
   .form-success.show{ display: block; animation: pageIn .4s ease both; }
@@ -2404,12 +2391,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </li>
         </ul>
 
-        <div class="map-placeholder">
-          <div class="map-pin"><i class="ti ti-map-pin-filled"></i></div>
-          <div class="map-caption">
-            <span><strong>Hybešova 38/724</strong> · Brno</span>
-            <i class="ti ti-external-link"></i>
-          </div>
+        <div class="map-wrap">
+          <iframe
+            src="https://www.google.com/maps?q=Hybešova+38%2F724,+602+00+Brno&output=embed"
+            title="Poloha autoškoly heleN — Hybešova 38/724, Brno"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+          ></iframe>
+          <a class="map-open-link"
+             href="https://maps.google.com/?q=Hybešova+38%2F724,+602+00+Brno"
+             target="_blank" rel="noopener"
+             aria-label="Otevřít v Google Mapách">
+            <i class="ti ti-map-2" aria-hidden="true"></i>
+            <span class="lang lang-cz">Otevřít v mapách</span>
+            <span class="lang lang-ua">Відкрити в картах</span>
+          </a>
         </div>
 
         <h3 class="mt-lg">
