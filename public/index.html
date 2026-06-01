@@ -17,14 +17,34 @@
 <meta property="og:url" content="https://www.helenautoskola.cz/" />
 <meta property="og:title" content="heleN autoškola — pro strašpytlíky | Brno" />
 <meta property="og:description" content="Empatický přístup, 1:1 lekce, psychologický výcvik. Pro ty, kdo se bojí. 94 % úspěšnost u zkoušek. Konzultace zdarma." />
-<meta property="og:image" content="https://www.helenautoskola.cz/public/og-image.jpg" />
+<meta property="og:image" content="https://www.helenautoskola.cz/og-image.jpg" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:image:alt" content="heleN autoškola Brno — řídit se naučíte, i když se bojíte" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="heleN autoškola — pro strašpytlíky | Brno" />
 <meta name="twitter:description" content="Empatický přístup, 1:1 lekce, psychologický výcvik. Pro ty, kdo se bojí." />
-<meta name="twitter:image" content="https://www.helenautoskola.cz/public/og-image.jpg" />
+<meta name="twitter:image" content="https://www.helenautoskola.cz/og-image.jpg" />
+
+<!-- Google Consent Mode v2 — musí být PŘED načtením gtag.js -->
+<!-- TODO: až dostanete GA4 Measurement ID (G-XXXXXXXXXX) a Google Ads ID,
+     odkomentujte řádky níže a doplňte správné ID -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  // Výchozí stav: vše zakázáno (Privacy by default, požadavek EU)
+  gtag('consent', 'default', {
+    analytics_storage:    'denied',
+    ad_storage:           'denied',
+    ad_user_data:         'denied',
+    ad_personalization:   'denied',
+    wait_for_update:      500
+  });
+  gtag('js', new Date());
+  // gtag('config', 'G-XXXXXXXXXX'); // ← doplňte GA4 Measurement ID
+  // gtag('config', 'AW-XXXXXXXXX'); // ← doplňte Google Ads Conversion ID
+</script>
+<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -2350,11 +2370,11 @@
           </li>
           <li>
             <div class="icon"><i class="ti ti-mail"></i></div>
-            <a href="/cdn-cgi/l/email-protection#f6be939a9398b7838299859d999a97b6919b979f9ad8958c">
+            <a href="mailto:HeleNautoskola@gmail.com">
               <div class="label">
                 <span class="lang lang-cz">E-mail</span><span class="lang lang-ua">Електронна пошта</span>
               </div>
-              <div class="value"><span class="__cf_email__" data-cfemail="a1e9c4cdc4cfe0d4d5ced2cacecdc0e1c6ccc0c8cd8fc2db">[email&#160;protected]</span></div>
+              <div class="value">HeleNautoskola@gmail.com</div>
             </a>
           </li>
           <li>
@@ -2363,7 +2383,7 @@
               <div class="label">
                 <span class="lang lang-cz">Adresa</span><span class="lang lang-ua">Адреса</span>
               </div>
-              <div class="value">Hybešova 38/105, 602 00 Brno</div>
+              <div class="value">Hybešova 38/724, 602 00 Brno</div>
             </div>
           </li>
           <li>
@@ -2383,7 +2403,7 @@
         <div class="map-placeholder">
           <div class="map-pin"><i class="ti ti-map-pin-filled"></i></div>
           <div class="map-caption">
-            <span><strong>Hybešova 38/105</strong> · Brno</span>
+            <span><strong>Hybešova 38/724</strong> · Brno</span>
             <i class="ti ti-external-link"></i>
           </div>
         </div>
@@ -2454,8 +2474,8 @@
 
         <div class="privacy-info-box">
           <strong><span class="lang lang-cz">Správce osobních údajů:</span><span class="lang lang-ua">Адміністратор персональних даних:</span></strong>
-          <span class="lang lang-cz"> Helena Harvotová, IČO 70688915, Hybešova 38/105, 602 00 Brno. E-mail: HeleNAutoskola@gmail.cz · Tel: +420 739 122 002</span>
-          <span class="lang lang-ua"> Helena Harvotová, IČO 70688915, Hybešova 38/105, 602 00 Brno. E-mail: HeleNAutoskola@gmail.cz · Tel: +420 739 122 002</span>
+          <span class="lang lang-cz"> Helena Marie Harvotová, IČO 70688915, Hybešova 38/724, 602 00 Brno. E-mail: HeleNautoskola@gmail.com · Tel: +420 739 122 002</span>
+          <span class="lang lang-ua"> Helena Marie Harvotová, IČO 70688915, Hybešova 38/724, 602 00 Brno. E-mail: HeleNautoskola@gmail.com · Tel: +420 739 122 002</span>
         </div>
 
         <h2><span class="lang lang-cz">1. Jaké údaje zpracováváme</span><span class="lang lang-ua">1. Які дані ми обробляємо</span></h2>
@@ -2492,30 +2512,115 @@
               <td><span class="lang lang-cz">Google Analytics — anonymizovaná statistika návštěvnosti</span><span class="lang lang-ua">Google Analytics — анонімна статистика</span></td>
               <td>2 <span class="lang lang-cz">roky</span><span class="lang lang-ua">роки</span></td>
             </tr>
+            <tr>
+              <td><code>_gcl_au, _gads</code></td>
+              <td><span class="lang lang-cz">Reklamní</span><span class="lang lang-ua">Рекламні</span></td>
+              <td><span class="lang lang-cz">Google Ads — měření konverzí a remarketing</span><span class="lang lang-ua">Google Ads — вимірювання конверсій та ремаркетинг</span></td>
+              <td>90 <span class="lang lang-cz">dní</span><span class="lang lang-ua">днів</span></td>
+            </tr>
           </tbody>
         </table>
 
         <h2><span class="lang lang-cz">3. Vaše práva</span><span class="lang lang-ua">3. Ваші права</span></h2>
-        <p><span class="lang lang-cz">Máte právo na přístup k osobním údajům, jejich opravu nebo výmaz, omezení zpracování, přenositelnost a podání námitky. Souhlas s analytickými cookies lze kdykoli odvolat v nastavení cookies (ikona sušenky vlevo dole). Máte také právo podat stížnost u dozorového úřadu:</span><span class="lang lang-ua">Ви маєте право на доступ до персональних даних, їх виправлення або видалення, обмеження обробки, перенесення та заперечення. Згоду на аналітичні cookies можна відкликати в налаштуваннях (іконка печива). Ви також маєте право звернутися до наглядового органу:</span></p>
+        <p><span class="lang lang-cz">Máte právo na přístup k osobním údajům, jejich opravu nebo výmaz, omezení zpracování a podání námitky proti zpracování. Souhlas s analytickými a reklamními cookies lze kdykoli odvolat v nastavení cookies (ikona sušenky vpravo dole). Svá práva uplatňujte e-mailem nebo telefonicky. Máte také právo podat stížnost u dozorového úřadu:</span><span class="lang lang-ua">Ви маєте право на доступ до персональних даних, їх виправлення або видалення, обмеження обробки та заперечення проти обробки. Згоду на аналітичні та рекламні cookies можна відкликати в налаштуваннях (іконка печива). Реалізуйте свої права електронною поштою або телефоном. Ви також маєте право звернутися до наглядового органу:</span></p>
         <ul>
           <li><span class="lang lang-cz"><strong>Úřad pro ochranu osobních údajů (ÚOOÚ)</strong> — <a href="https://www.uoou.cz" target="_blank" rel="noopener">www.uoou.cz</a></span><span class="lang lang-ua"><strong>Úřad pro ochranu osobních údajů (ÚOOÚ)</strong> — <a href="https://www.uoou.cz" target="_blank" rel="noopener">www.uoou.cz</a></span></li>
         </ul>
-        <p><span class="lang lang-cz">Svá práva uplatňujte e-mailem nebo telefonicky (kontakty viz záhlaví dokumentu).</span><span class="lang lang-ua">Реалізуйте свої права електронною поштою або телефоном (контакти у заголовку документа).</span></p>
 
         <h2><span class="lang lang-cz">4. Příjemci a zpracovatelé</span><span class="lang lang-ua">4. Одержувачі та обробники</span></h2>
         <p><span class="lang lang-cz">Vaše osobní údaje neprodáváme ani nesdílíme s třetími stranami za marketingovými účely. Přístup k datům mají pouze níže uvedení zpracovatelé v rozsahu nezbytném k poskytnutí služby:</span><span class="lang lang-ua">Ми не продаємо та не передаємо ваші персональні дані третім особам у маркетингових цілях. Доступ до даних мають лише наступні обробники в обсязі, необхідному для надання послуги:</span></p>
         <ul>
-          <li>Google Ireland Ltd. (analytika — pouze při souhlasu)</li>
-          <li><span class="lang lang-cz">Poskytovatel webhostingu (technická správa)</span><span class="lang lang-ua">Провайдер хостингу (технічне обслуговування)</span></li>
+          <li><strong>Google Ireland Ltd.</strong> — <span class="lang lang-cz">analytika a reklama (Google Analytics, Google Ads), pouze při souhlasu; data mohou být předávána mimo EHP na základě standardních smluvních doložek.</span><span class="lang lang-ua">аналітика та реклама (Google Analytics, Google Ads), тільки за згодою; дані можуть передаватися за межі ЄЕА на підставі стандартних договірних положень.</span></li>
+          <li><strong>Formspree, Inc.</strong> — <span class="lang lang-cz">zpracování kontaktního formuláře; sídlo USA, přenos na základě standardních smluvních doložek.</span><span class="lang lang-ua">обробка контактної форми; США, передача на підставі стандартних договірних положень.</span></li>
+          <li><strong>Vercel, Inc.</strong> — <span class="lang lang-cz">webhosting a CDN; sídlo USA, přenos na základě standardních smluvních doložek.</span><span class="lang lang-ua">хостинг та CDN; США, передача на підставі стандартних договірних положень.</span></li>
         </ul>
 
         <h2><span class="lang lang-cz">5. Platnost a aktualizace</span><span class="lang lang-ua">5. Чинність та оновлення</span></h2>
         <p><span class="lang lang-cz">Tyto zásady jsou platné od 1. 6. 2026. O podstatných změnách vás budeme informovat prostřednictvím webu.</span><span class="lang lang-ua">Ця політика діє з 1. 6. 2026. Про суттєві зміни ми повідомлятимемо через сайт.</span></p>
 
-        <div style="margin-top: 2.5rem;">
+        <div style="margin-top: 2.5rem; display:flex; gap:1rem; flex-wrap:wrap;">
           <a href="#" class="btn btn-ghost" data-nav="home">
             <i class="ti ti-arrow-left"></i>
             <span class="lang lang-cz">Zpět na web</span><span class="lang lang-ua">Назад на сайт</span>
+          </a>
+          <a href="#" class="btn btn-ghost" data-nav="vop">
+            <i class="ti ti-file-text"></i>
+            <span class="lang lang-cz">Obchodní podmínky</span><span class="lang lang-ua">Умови обслуговування</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</section>
+
+<!-- ===================== VOP ===================== -->
+<section class="page" id="page-vop" data-screen-label="06 VOP">
+
+  <div class="privacy-hero">
+    <div class="container">
+      <div class="eyebrow">
+        <span class="lang lang-cz">Právní informace</span><span class="lang lang-ua">Юридична інформація</span>
+      </div>
+      <h1 class="mt-md" style="font-size: clamp(1.9rem, 3.5vw, 2.8rem);">
+        <span class="lang lang-cz">Obchodní<br/><em class="it">podmínky</em></span>
+        <span class="lang lang-ua">Умови<br/><em class="it">обслуговування</em></span>
+      </h1>
+      <p class="lead mt-md">
+        <span class="lang lang-cz">Podmínky kurzů autoškoly heleN — ceny, platby, storno, reklamace.</span>
+        <span class="lang lang-ua">Умови курсів автошколи heleN — ціни, оплата, скасування, рекламації.</span>
+      </p>
+    </div>
+  </div>
+
+  <section class="section privacy-body">
+    <div class="container">
+      <div class="privacy-prose">
+
+        <div class="privacy-info-box">
+          <strong><span class="lang lang-cz">Provozovatel:</span><span class="lang lang-ua">Оператор:</span></strong>
+          <span class="lang lang-cz"> Helena Marie Harvotová, IČO 70688915, Hybešova 38/724, 602 00 Brno. E-mail: HeleNautoskola@gmail.com · Tel: +420 739 122 002</span>
+          <span class="lang lang-ua"> Helena Marie Harvotová, IČO 70688915, Hybešova 38/724, 602 00 Brno. E-mail: HeleNautoskola@gmail.com · Tel: +420 739 122 002</span>
+        </div>
+
+        <h2><span class="lang lang-cz">I. Rozsah a vznik smlouvy</span><span class="lang lang-ua">I. Предмет і укладення договору</span></h2>
+        <p><span class="lang lang-cz">Tyto obchodní podmínky upravují vztah mezi autoškolou heleN (dále „autoškola") a žákem (dále „zákazník") při nákupu výuky a výcviku pro získání řidičského oprávnění. Smlouva vzniká uhrazením zálohy nebo celé ceny kurzu.</span><span class="lang lang-ua">Ці умови регулюють відносини між автошколою heleN (далі «автошкола») та учнем (далі «замовник») при придбанні навчання та підготовки для отримання посвідчення водія. Договір набуває чинності після сплати авансу або повної вартості курсу.</span></p>
+
+        <h2><span class="lang lang-cz">II. Cena a platební podmínky</span><span class="lang lang-ua">II. Ціна та умови оплати</span></h2>
+        <p><span class="lang lang-cz">Ceny kurzů jsou uvedeny na stránce Kurzy &amp; ceník a jsou platné ke dni objednávky. Zákazník hradí cenu v hotovosti nebo bankovním převodem na základě výzvy autoškoly. Autoškola si vyhrazuje právo ceny měnit; zákazníka to neovlivní, pokud kurz uhradil před změnou.</span><span class="lang lang-ua">Ціни курсів наведені на сторінці «Курси та ціни» і є дійсними на день замовлення. Замовник сплачує вартість готівкою або банківським переказом на підставі рахунку автошколи. Автошкола залишає за собою право змінювати ціни; це не стосується замовника, який оплатив курс до зміни.</span></p>
+
+        <h2><span class="lang lang-cz">III. Storno podmínky a odstoupení od smlouvy</span><span class="lang lang-ua">III. Умови скасування та відмови від договору</span></h2>
+        <p><span class="lang lang-cz">Zákazník může od smlouvy odstoupit zasláním písemného oznámení e-mailem. Storno poplatky:</span><span class="lang lang-ua">Замовник може відмовитися від договору, надіславши письмове повідомлення електронною поштою. Збори за скасування:</span></p>
+        <ul>
+          <li><span class="lang lang-cz"><strong>Více než 14 dní</strong> před zahájením výuky — vrácení 100 % uhrazené částky.</span><span class="lang lang-ua"><strong>Більше 14 днів</strong> до початку навчання — повернення 100 % сплаченої суми.</span></li>
+          <li><span class="lang lang-cz"><strong>7–14 dní</strong> před zahájením — storno poplatek 20 % z ceny kurzu.</span><span class="lang lang-ua"><strong>7–14 dnів</strong> до початку — збір за скасування 20 % вартості курсу.</span></li>
+          <li><span class="lang lang-cz"><strong>Méně než 7 dní</strong> před zahájením — storno poplatek 50 % z ceny kurzu.</span><span class="lang lang-ua"><strong>Менше 7 днів</strong> до початку — збір за скасування 50 % вартості курсу.</span></li>
+          <li><span class="lang lang-cz"><strong>Po zahájení výuky</strong> — nárok na vrácení nevzniká, pokud nebude dohodnut individuální splátkový plán.</span><span class="lang lang-ua"><strong>Після початку навчання</strong> — право на повернення не виникає, якщо не буде укладено індивідуальний план розстрочки.</span></li>
+        </ul>
+        <p><span class="lang lang-cz">Autoškola může smlouvu ukončit z důvodu hrubého porušení kázně nebo bezpečnosti — v takovém případě nevzniká nárok na vrácení uhrazené ceny. V případě zrušení termínu ze strany autoškoly bude zákazníkovi nabídnut náhradní termín nebo vrácení platby v plné výši.</span><span class="lang lang-ua">Автошкола може розірвати договір у разі грубого порушення дисципліни або безпеки — у такому випадку право на повернення сплаченої вартості не виникає. У разі скасування заняття з боку автошколи замовнику буде запропоновано альтернативний термін або повне повернення коштів.</span></p>
+
+        <h2><span class="lang lang-cz">IV. Reklamace a odpovědnost</span><span class="lang lang-ua">IV. Рекламації та відповідальність</span></h2>
+        <p><span class="lang lang-cz">Reklamaci lze uplatnit e-mailem nebo osobně. Autoškola vyřídí reklamaci do 30 dní od doručení. Autoškola neodpovídá za neúspěch u státní zkoušky; výcvik je poskytován v souladu se zákonem č. 247/2000 Sb. o získávání a zdokonalování odborné způsobilosti k řízení motorových vozidel.</span><span class="lang lang-ua">Рекламацію можна подати електронною поштою або особисто. Автошкола розгляне рекламацію протягом 30 днів з дня отримання. Автошкола не несе відповідальності за провал державного іспиту; навчання надається відповідно до Закону № 247/2000 Зб. про набуття та вдосконалення кваліфікації водія.</span></p>
+
+        <h2><span class="lang lang-cz">V. Mimosoudní řešení sporů</span><span class="lang lang-ua">V. Позасудове вирішення спорів</span></h2>
+        <p><span class="lang lang-cz">V případě sporu mezi zákazníkem a autoškolou, který se nepodaří vyřešit dohodou, má zákazník právo obrátit se na orgán mimosoudního řešení spotřebitelských sporů:</span><span class="lang lang-ua">У разі спору між замовником та автошколою, який не вдалося вирішити шляхом переговорів, замовник має право звернутися до органу позасудового вирішення споживчих спорів:</span></p>
+        <ul>
+          <li><strong>Česká obchodní inspekce (COI)</strong> — <a href="https://www.coi.cz" target="_blank" rel="noopener">www.coi.cz</a></li>
+          <li><span class="lang lang-cz"><strong>Platforma ODR</strong> (online řešení sporů EU) — </span><span class="lang lang-ua"><strong>Платформа ODR</strong> (онлайн-вирішення спорів ЄС) — </span><a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener">ec.europa.eu/consumers/odr</a></li>
+        </ul>
+
+        <h2><span class="lang lang-cz">VI. Závěrečná ustanovení</span><span class="lang lang-ua">VI. Заключні положення</span></h2>
+        <p><span class="lang lang-cz">Tyto podmínky se řídí právem České republiky. Jsou platné od 1. 6. 2026. Autoškola si vyhrazuje právo podmínky měnit; platná verze je vždy dostupná na tomto webu.</span><span class="lang lang-ua">Ці умови регулюються законодавством Чеської Республіки. Вони є дійсними з 1. 6. 2026. Автошкола залишає за собою право змінювати умови; актуальна версія завжди доступна на цьому сайті.</span></p>
+
+        <div style="margin-top: 2.5rem; display:flex; gap:1rem; flex-wrap:wrap;">
+          <a href="#" class="btn btn-ghost" data-nav="home">
+            <i class="ti ti-arrow-left"></i>
+            <span class="lang lang-cz">Zpět na web</span><span class="lang lang-ua">Назад на сайт</span>
+          </a>
+          <a href="#" class="btn btn-ghost" data-nav="privacy">
+            <i class="ti ti-shield-lock"></i>
+            <span class="lang lang-cz">Ochrana osobních údajů</span><span class="lang lang-ua">Захист персональних даних</span>
           </a>
         </div>
 
@@ -2548,14 +2653,15 @@
           <li><a href="#" data-nav="courses"><span class="lang lang-cz">Kurzy &amp; ceník</span><span class="lang lang-ua">Курси та ціни</span></a></li>
           <li><a href="#" data-nav="contact"><span class="lang lang-cz">Kontakt</span><span class="lang lang-ua">Контакти</span></a></li>
           <li><a href="#" data-nav="privacy"><span class="lang lang-cz">Ochrana osobních údajů</span><span class="lang lang-ua">Захист персональних даних</span></a></li>
+          <li><a href="#" data-nav="vop"><span class="lang lang-cz">Obchodní podmínky</span><span class="lang lang-ua">Умови обслуговування</span></a></li>
         </ul>
       </div>
       <div>
         <h4><span class="lang lang-cz">Kontakt</span><span class="lang lang-ua">Контакти</span></h4>
         <ul>
           <li><a href="tel:+420739122002">+420 739 122 002</a></li>
-          <li><a href="/cdn-cgi/l/email-protection#337b565f565d7246475c40585c5f5273545e525a5f1d5049">HelenAutoskola@<br/>gmail.cz</a></li>
-          <li>Hybešova 38/105, Brno</li>
+          <li><a href="mailto:HeleNautoskola@gmail.com">HeleNautoskola@gmail.com</a></li>
+          <li>Hybešova 38/724, Brno</li>
         </ul>
       </div>
       <div>
@@ -2674,10 +2780,11 @@
     about:   document.getElementById('page-about'),
     courses: document.getElementById('page-courses'),
     contact: document.getElementById('page-contact'),
-    privacy: document.getElementById('page-privacy')
+    privacy: document.getElementById('page-privacy'),
+    vop:     document.getElementById('page-vop')
   };
   // Pages that don't appear in main nav (no active highlight)
-  const hiddenFromNav = new Set(['privacy']);
+  const hiddenFromNav = new Set(['privacy', 'vop']);
 
   function setActiveNav(target){
     document.querySelectorAll('.nav a, .mobile-menu a').forEach(a=>{
@@ -2918,7 +3025,17 @@
       setTimeout(()=>{ root.hidden = true; }, 360);
       fab.hidden = false;
     }
-    function decide(prefs){ savePrefs(prefs); close(); }
+    function applyConsent(prefs){
+      if(typeof gtag === 'function'){
+        gtag('consent', 'update', {
+          analytics_storage:  prefs.analytics ? 'granted' : 'denied',
+          ad_storage:         prefs.marketing ? 'granted' : 'denied',
+          ad_user_data:       prefs.marketing ? 'granted' : 'denied',
+          ad_personalization: prefs.marketing ? 'granted' : 'denied'
+        });
+      }
+    }
+    function decide(prefs){ savePrefs(prefs); applyConsent(prefs); close(); }
 
     acceptBtn.addEventListener('click', ()=>{
       // untouched = accept all; touched = save current toggle selection
@@ -2934,6 +3051,7 @@
       // first visit — show after a short beat so the page settles
       setTimeout(()=> open(null), 900);
     } else {
+      applyConsent(existing); // restore consent signals on repeat visits
       fab.hidden = false;
     }
   })();
