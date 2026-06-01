@@ -26,13 +26,10 @@
 <meta name="twitter:description" content="Empatický přístup, 1:1 lekce, psychologický výcvik. Pro ty, kdo se bojí." />
 <meta name="twitter:image" content="https://www.helenautoskola.cz/og-image.jpg" />
 
-<!-- Google Consent Mode v2 — musí být PŘED načtením gtag.js -->
-<!-- TODO: až dostanete GA4 Measurement ID (G-XXXXXXXXXX) a Google Ads ID,
-     odkomentujte řádky níže a doplňte správné ID -->
+<!-- ① Consent Mode v2 defaults — MUSÍ být před GTM skriptem -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){ dataLayer.push(arguments); }
-  // Výchozí stav: vše zakázáno (Privacy by default, požadavek EU)
   gtag('consent', 'default', {
     analytics_storage:    'denied',
     ad_storage:           'denied',
@@ -40,11 +37,15 @@
     ad_personalization:   'denied',
     wait_for_update:      500
   });
-  gtag('js', new Date());
-  // gtag('config', 'G-XXXXXXXXXX'); // ← doplňte GA4 Measurement ID
-  // gtag('config', 'AW-XXXXXXXXX'); // ← doplňte Google Ads Conversion ID
 </script>
-<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> -->
+
+<!-- ② Google Tag Manager — TODO: nahraďte GTM-XXXXXXX vaším Container ID -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
+<!-- Konfigurace tagů (GA4, Google Ads, Hotjar…) patří do GTM, ne do kódu -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -985,6 +986,9 @@
 </style>
 </head>
 <body data-lang="cs">
+<!-- Google Tag Manager (noscript) — TODO: nahraďte GTM-XXXXXXX vaším Container ID -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <a class="skip-link" href="#main-content">
   <span class="lang lang-cz">Přeskočit na obsah</span><span class="lang lang-ua">Перейти до змісту</span>
